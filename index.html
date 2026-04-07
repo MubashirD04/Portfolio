@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <meta name="description"
+        content="A premium digital portfolio showcasing modern web architecture and creative design.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Mubashir Dawood</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header id="home">
+        <h1 class="hero-title">Creative Developer</h1>
+        <p class="hero-subtitle">Crafting immersive digital experiences with cutting-edge technologies and elegant
+            design.</p>
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+    </header>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="card">
+            <p>I'm a Computer Science graduate who enjoys building backend systems and understanding how applications
+                work under the hood.
+                I'm especially interested in APIs, data processing, and system design, and like projects where
+                performance and correctness matter.</p>
+            <p> I've worked with Python, Rust, and React, and enjoy learning new technologies by applying them in
+                practical projects.</p>
+            <p> I'm looking for a graduate or junior role where I can grow as an engineer while working in a
+                collaborative, engineering-focused team.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Toolkit</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Frontend</h3>
+                <p>HTML5, CSS3, JavaScript (ES6+), React, Vue</p>
+            </div>
+            <div class="card">
+                <h3>Backend</h3>
+                <p>Node.js, Python, PostgreSQL, MongoDB</p>
+            </div>
+            <div class="card">
+                <h3>Design</h3>
+                <p>Figma, Adobe XD, UI/UX Principles, Glassmorphism</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="grid projects-grid">
+            <div class="card project-card" id="project-1">
+                <div class="card-main">
+                    <h3>Nebula Cloud</h3>
+                    <p>A decentralized storage solution with end-to-end encryption.</p>
+                    <button class="btn btn-primary explore-btn">Explore Case Study</button>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-grid">
+                        <div class="case-study-info">
+                            <h4>Overview</h4>
+                            <p>Nebula Cloud addresses the growing need for privacy in cloud storage. Using advanced
+                                AES-256 encryption and a zero-knowledge architecture, users maintain full control over
+                                their data.</p>
+                            <h4>Tech Stack</h4>
+                            <ul>
+                                <li>Rust (Core Logic)</li>
+                                <li>TypeScript (Frontend)</li>
+                                <li>IPFS (Storage Protocol)</li>
+                            </ul>
+                        </div>
+                        <div class="case-study-preview">
+                            <div class="placeholder-img"
+                                style="background: #eee; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888;">
+                                Project Screenshot 1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card project-card" id="project-2">
+                <div class="card-main">
+                    <h3>Quantum Dash</h3>
+                    <p>Real-time analytics dashboard for quantum computing workloads.</p>
+                    <button class="btn btn-primary explore-btn">Explore Case Study</button>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-grid">
+                        <div class="case-study-info">
+                            <h4>Overview</h4>
+                            <p>A high-performance monitoring tool designed for quantum research labs. It visualizes
+                                qubit decoherence rates and gate fidelity in real-time with microsecond latency.</p>
+                            <h4>Tech Stack</h4>
+                            <ul>
+                                <li>React + D3.js</li>
+                                <li>Python (FastAPI)</li>
+                                <li>WebSockets</li>
+                            </ul>
+                        </div>
+                        <div class="case-study-preview">
+                            <div class="placeholder-img"
+                                style="background: #eee; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888;">
+                                Project Screenshot 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card project-card" id="project-3">
+                <div class="card-main">
+                    <h3>Lumina OS</h3>
+                    <p>A browser-based operating system built with WebAssembly.</p>
+                    <button class="btn btn-primary explore-btn">Explore Case Study</button>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-grid">
+                        <div class="case-study-info">
+                            <h4>Overview</h4>
+                            <p>Lumina OS pushes the boundaries of the web platform, bringing a full windowing system and
+                                file management directly to the browser using WASM for near-native performance.</p>
+                            <h4>Tech Stack</h4>
+                            <ul>
+                                <li>C++ (Wasm)</li>
+                                <li>JavaScript (Canvas API)</li>
+                                <li>Node.js</li>
+                            </ul>
+                        </div>
+                        <div class="case-study-preview">
+                            <div class="placeholder-img"
+                                style="background: #eee; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888;">
+                                Project Screenshot 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 20px;">Interested in working together? Let's build something extraordinary.</p>
+            <p><strong>Email:</strong> mubashir.dawood4@gmail.com</p>
+            <p><strong>GitHub:</strong> github.com/MubashirD04</p>
+            <a href="mailto:mubashir.dawood4@gmail.com" class="btn btn-primary">Send a Message</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portfolio. Built with passion and precision.</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

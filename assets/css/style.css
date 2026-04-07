@@ -1,0 +1,323 @@
+/* CSS Design System */
+:root {
+    --primary-color: #0071e3;
+    --secondary-color: #40b0ff;
+    --bg-light: #fbfbfd;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --text-main: #1d1d1f;
+    --text-muted: #86868b;
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary-color), var(--secondary-color));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(251, 251, 253, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-light);
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    padding: 100px 10vw;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 24px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.5s ease,
+        border-color 0.5s ease;
+    overflow: hidden;
+    position: relative;
+    cursor: default;
+    will-change: transform, box-shadow;
+}
+
+/* Scroll Reveal States */
+.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-hidden.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+.card:hover:not(.expanded) {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+/* Expansion Logic */
+/* Expansion Logic - FLIP / Overlay */
+.project-card {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    background: var(--card-bg);
+    z-index: 1;
+}
+
+/* The placeholder that keeps the grid structure intact */
+.project-card-placeholder {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* The expanding card in its fixed state */
+.project-card.fixed-expanding {
+    position: fixed;
+    z-index: 1000;
+    margin: 0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    /* Prevent text glitching during transition */
+    will-change: top, left, width, height, border-radius, transform;
+    transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        left 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Overlay backdrop */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Inner content transition */
+.case-study-content {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease 0.2s;
+    /* Delayed fade in */
+}
+
+.project-card.expanded .case-study-content {
+    opacity: 1;
+    height: auto;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--glass-border);
+    /* Allow content to scroll if needed within the fixed card */
+    overflow-y: auto;
+    max-height: calc(70vh - 150px);
+}
+
+.case-study-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+    .case-study-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.case-study-info h4 {
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.case-study-info p {
+    margin-bottom: 20px;
+    color: var(--text-muted);
+}
+
+.case-study-info ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.case-study-info ul li {
+    background: var(--bg-light);
+    border: 1px solid var(--glass-border);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
+}
+
+footer {
+    padding: 50px;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-muted);
+}
