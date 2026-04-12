@@ -2,10 +2,10 @@
 :root {
     --primary-color: #61432b;
     --secondary-color: #92817A;
-    --bg-light: #F1DABF;
+    --bg-light: #f1e3d3;
     --card-bg: rgba(255, 255, 255, 0.7);
     --text-main: #3e2819;
-    --text-muted: #8b6f5e;
+    --text-muted: #775d4d;
     --glass-border: rgba(54, 36, 23, 0.1);
     --font-family: 'Outfit', sans-serif;
 }
@@ -54,7 +54,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(241, 218, 191, 0.8);
+    background: rgba(209, 150, 83, 0.804);
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid var(--glass-border);
@@ -83,6 +83,7 @@ nav {
 .nav-links a {
     color: var(--text-main);
     text-decoration: none;
+    font-size: 1.1rem;
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -288,6 +289,7 @@ section {
 
 .card {
     background: var(--card-bg);
+    font-size: 1.0rem;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
