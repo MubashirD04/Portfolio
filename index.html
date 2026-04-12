@@ -15,12 +15,18 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 
 <body>
 
     <nav>
-        <div class="logo">Mubashir Dawood</div>
+        <div class="logo">
+            <img src="img/favicon.png" alt="Logo" class="logo-img">
+            Mubashir Dawood
+        </div>
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#about">About</a>
@@ -31,6 +37,19 @@
     </nav>
 
     <header id="home">
+        <div class="hero-image-container">
+            <div class="hero-image-reel">
+                <div class="hero-img-wrapper">
+                    <img src="img/hero1.png" alt="Creative Interface 1" class="hero-img">
+                </div>
+                <div class="hero-img-wrapper">
+                    <img src="img/hero2.png" alt="Creative Interface 2" class="hero-img">
+                </div>
+                <div class="hero-img-wrapper">
+                    <img src="img/hero3.png" alt="Creative Interface 3" class="hero-img">
+                </div>
+            </div>
+        </div>
         <h1 class="hero-title">Creative Developer</h1>
         <p class="hero-subtitle">Crafting immersive digital experiences with cutting-edge technologies and elegant
             design.</p>
@@ -56,15 +75,15 @@
         <div class="grid">
             <div class="card">
                 <h3>Frontend</h3>
-                <p>HTML5, CSS3, JavaScript (ES6+), React, Vue</p>
+                <p>HTML, CSS, JavaScript, TypeScript, React, Vue</p>
             </div>
             <div class="card">
                 <h3>Backend</h3>
-                <p>Node.js, Python, PostgreSQL, MongoDB</p>
+                <p>Node.js, Python, Java, Go, Rust, Sqlite, Redis, PostgreSQL, MongoDB</p>
             </div>
             <div class="card">
-                <h3>Design</h3>
-                <p>Figma, Adobe XD, UI/UX Principles, Glassmorphism</p>
+                <h3>Frameworks</h3>
+                <p>Express, Django, Flask, Spring Boot, Gin, FastAPI</p>
             </div>
         </div>
     </section>
@@ -74,23 +93,17 @@
         <div class="grid projects-grid">
             <div class="card project-card" id="project-1">
                 <div class="card-main">
-                    <h3>Nebula Cloud</h3>
-                    <p>A decentralized storage solution with end-to-end encryption.</p>
+                    <h3>Notes CLI</h3>
+                    <p>A fast Go CLI that takes a lecture transcript, and appends them to a JSON file grouped by course.</p>
                     <button class="btn btn-primary explore-btn">Explore Case Study</button>
                 </div>
                 <div class="case-study-content">
                     <div class="case-study-grid">
                         <div class="case-study-info">
                             <h4>Overview</h4>
-                            <p>Nebula Cloud addresses the growing need for privacy in cloud storage. Using advanced
-                                AES-256 encryption and a zero-knowledge architecture, users maintain full control over
-                                their data.</p>
-                            <h4>Tech Stack</h4>
-                            <ul>
-                                <li>Rust (Core Logic)</li>
-                                <li>TypeScript (Frontend)</li>
-                                <li>IPFS (Storage Protocol)</li>
-                            </ul>
+                            <p>Adresses the problem of taking notes from lectures, and transforms lecture transcripts into structured, detailed AI notes. Grouped by course, synced to Joplin, and searchable via a built-in AI Assistant.
+                                <a href="https://github.com/MubashirD04/Note-Creator-CLI-Tool" target="_blank" style="color: var(--primary-color);">GitHub</a>
+                            </p>
                         </div>
                         <div class="case-study-preview">
                             <div class="placeholder-img"
@@ -98,33 +111,48 @@
                                 Project Screenshot 1</div>
                         </div>
                     </div>
+                    <div class="case-study-tech">
+                        <h4>Tech Stack</h4>
+                        <ul>
+                            <li>Go (Core Logic)</li>
+                            <li>Groq (AI Handler)</li>
+                            <li>Joplin (Interpreter)</li>
+                            <li>JSON (local storage)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <div class="card project-card" id="project-2">
                 <div class="card-main">
-                    <h3>Quantum Dash</h3>
-                    <p>Real-time analytics dashboard for quantum computing workloads.</p>
+                    <h3>Social Network RAG</h3>
+                    <p>A tool that analyzes social networks and provides insights into the structure and dynamics of the network.</p>
                     <button class="btn btn-primary explore-btn">Explore Case Study</button>
                 </div>
                 <div class="case-study-content">
                     <div class="case-study-grid">
                         <div class="case-study-info">
                             <h4>Overview</h4>
-                            <p>A high-performance monitoring tool designed for quantum research labs. It visualizes
-                                qubit decoherence rates and gate fidelity in real-time with microsecond latency.</p>
-                            <h4>Tech Stack</h4>
-                            <ul>
-                                <li>React + D3.js</li>
-                                <li>Python (FastAPI)</li>
-                                <li>WebSockets</li>
-                            </ul>
+                            <p>A social network analysis tool that turns raw group chat exports into an interactive graph and exposes that analysis as an API and MCP server, allowing easy integration for AI models. 
+                                Drop in a chat file, get back a structured map of who influences who, who brokers information between groups, and what the team is talking about.
+                                <a href="https://github.com/MubashirD04/Social-Network-RAG" target="_blank" style="color: var(--primary-color);">GitHub</a>
+                            </p>
                         </div>
                         <div class="case-study-preview">
                             <div class="placeholder-img"
                                 style="background: #eee; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888;">
                                 Project Screenshot 2</div>
                         </div>
+                    </div>
+                    <div class="case-study-tech">
+                        <h4>Tech Stack</h4>
+                        <ul>
+                            <li>Uvicorn (Server)</li>
+                            <li>FastAPI (API)</li>
+                            <li>NetworkX, KeyBert (Analysis)</li>
+                            <li>Sentence Transformers (Embeddings)</li>
+                            <li>MCP (Anthropic SDK)</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -141,18 +169,20 @@
                             <h4>Overview</h4>
                             <p>Lumina OS pushes the boundaries of the web platform, bringing a full windowing system and
                                 file management directly to the browser using WASM for near-native performance.</p>
-                            <h4>Tech Stack</h4>
-                            <ul>
-                                <li>C++ (Wasm)</li>
-                                <li>JavaScript (Canvas API)</li>
-                                <li>Node.js</li>
-                            </ul>
                         </div>
                         <div class="case-study-preview">
                             <div class="placeholder-img"
                                 style="background: #eee; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888;">
                                 Project Screenshot 3</div>
                         </div>
+                    </div>
+                    <div class="case-study-tech">
+                        <h4>Tech Stack</h4>
+                        <ul>
+                            <li>C++ (Wasm)</li>
+                            <li>JavaScript (Canvas API)</li>
+                            <li>Node.js</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -164,7 +194,9 @@
         <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
             <p style="margin-bottom: 20px;">Interested in working together? Let's build something extraordinary.</p>
             <p><strong>Email:</strong> mubashir.dawood4@gmail.com</p>
-            <p><strong>GitHub:</strong> github.com/MubashirD04</p>
+            <p><strong>GitHub:</strong> 
+                <a href="https://github.com/MubashirD04" style="color: var(--primary-color);" target="_blank" rel="noopener noreferrer">github.com/MubashirD04</a>
+            </p>
             <a href="mailto:mubashir.dawood4@gmail.com" class="btn btn-primary">Send a Message</a>
         </div>
     </section>
@@ -173,7 +205,7 @@
         <p>&copy; 2026 Portfolio. Built with passion and precision.</p>
     </footer>
 
-    <script src="assets/js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

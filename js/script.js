@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     setupScrollReveal();
     setupCardExpansion();
+    setupTypewriter();
     console.log("Portfolio Loaded Successfully");
 });
 
@@ -20,6 +21,64 @@ const setupScrollReveal = () => {
         el.classList.add('reveal-hidden');
         observer.observe(el);
     });
+};
+
+/**
+ * Handles typewriter effect for section and hero titles
+ */
+const setupTypewriter = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Trigger when element is mostly in view
+            if (entry.isIntersecting && !entry.target.classList.contains('typed')) {
+                entry.target.classList.add('typed');
+                typeText(entry.target);
+            }
+        });
+    }, { threshold: 0.8 });
+
+    document.querySelectorAll('.hero-title, .section-title').forEach(el => {
+        el.dataset.text = el.innerText;
+        el.innerText = ''; // Clear existing text immediately
+        observer.observe(el);
+    });
+
+    function typeText(element) {
+        const text = element.dataset.text;
+        element.innerHTML = ''; 
+        const promptSpan = document.createElement('span');
+        promptSpan.className = 'typewriter-prompt';
+        promptSpan.innerText = '> ';
+        const textSpan = document.createElement('span');
+        const cursor = document.createElement('span');
+        cursor.className = 'typewriter-cursor';
+        cursor.innerText = '|';
+        
+        element.appendChild(promptSpan);
+        element.appendChild(textSpan);
+        element.appendChild(cursor);
+
+        let i = 0;
+
+        function typeChar() {
+            if (i < text.length) {
+                textSpan.textContent += text.charAt(i);
+                i++;
+                // Slight random variation in typing speed
+                const speed = Math.random() * 50 + 50; 
+                setTimeout(typeChar, speed);
+            } else {
+                // Keep cursor and prompt blinking for a moment, then fade them out
+                setTimeout(() => { 
+                    cursor.style.display = 'none'; 
+                    promptSpan.style.display = 'none'; // Make the prompt disappear
+                }, 2000);
+            }
+        }
+        
+        // Start typing after a short delay
+        setTimeout(typeChar, 400);
+    }
 };
 
 /**

@@ -61,9 +61,18 @@ nav {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 42px;
+    width: auto;
+    border-radius: 6px;
 }
 
 .nav-links {
@@ -83,24 +92,136 @@ nav {
 }
 
 header {
-    height: 100vh;
+    min-height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: var(--bg-light);
     text-align: center;
-    padding: 0 20px;
+    padding: 80px 20px 40px;
+}
+
+.hero-image-container {
+    perspective: 1200px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    will-change: transform, opacity;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+}
+
+.hero-image-reel {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transform-style: preserve-3d;
+    transform: rotateX(10deg);
+}
+
+.hero-img-wrapper {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: z-index 0s; /* Instant pop to front */
+}
+
+.hero-img-wrapper:hover {
+    z-index: 50;
+}
+
+.hero-img {
+    width: 380px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background: white;
+    pointer-events: none; /* Let wrapper handle interactions */
+    display: block;
+}
+
+.hero-img-wrapper:nth-child(1) .hero-img {
+    transform: translateZ(-30px) rotateY(20deg);
+}
+
+.hero-img-wrapper:nth-child(2) .hero-img {
+    transform: translateZ(20px) scale(1.05);
+}
+
+.hero-img-wrapper:nth-child(3) .hero-img {
+    transform: translateZ(-30px) rotateY(-20deg);
+}
+
+.hero-img-wrapper:hover .hero-img {
+    transform: translateZ(120px) scale(1.2) rotate(0) !important;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1100px) {
+    .hero-image-reel {
+        gap: -100px;
+    }
+
+    .hero-img {
+        width: 320px;
+        height: auto;
+        aspect-ratio: 16/10;
+    }
+
+    /* Pull side images toward center on hover for better visibility when overlapped */
+    .hero-img-wrapper:nth-child(1):hover .hero-img {
+        transform: translateZ(120px) scale(1.1) translateX(60px) rotate(0) !important;
+    }
+
+    .hero-img-wrapper:nth-child(3):hover .hero-img {
+        transform: translateZ(120px) scale(1.1) translateX(-60px) rotate(0) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-image-reel {
+        flex-direction: column;
+        gap: 20px;
+        transform: none;
+    }
+    
+    .hero-img {
+        width: 80vw;
+        height: auto;
+        aspect-ratio: 16/10;
+        transform: none !important;
+    }
 }
 
 .hero-title {
     font-size: 4rem;
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1s ease forwards;
+    margin: 10px 0 15px;
+    padding: 20px 0 0;
+}
+
+.typewriter-prompt {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.typewriter-cursor {
+    font-weight: 300;
+    color: var(--primary-color);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .hero-subtitle {
@@ -120,12 +241,13 @@ header {
 }
 
 section {
-    padding: 100px 10vw;
+    padding: 70px 10vw;
 }
 
 .section-title {
     font-size: 2.5rem;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+    margin-top: 30px;
     text-align: center;
     position: relative;
 }
@@ -267,7 +389,8 @@ section {
     }
 }
 
-.case-study-info h4 {
+.case-study-info h4,
+.case-study-tech h4 {
     margin-bottom: 10px;
     color: var(--text-main);
 }
@@ -277,14 +400,20 @@ section {
     color: var(--text-muted);
 }
 
-.case-study-info ul {
+.case-study-tech {
+    margin-top: 20px;
+}
+
+.case-study-info ul,
+.case-study-tech ul {
     list-style: none;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
 }
 
-.case-study-info ul li {
+.case-study-info ul li,
+.case-study-tech ul li {
     background: var(--bg-light);
     border: 1px solid var(--glass-border);
     padding: 5px 15px;
