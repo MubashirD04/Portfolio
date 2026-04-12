@@ -1,12 +1,12 @@
 /* CSS Design System */
 :root {
-    --primary-color: #0071e3;
-    --secondary-color: #40b0ff;
-    --bg-light: #fbfbfd;
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --text-main: #1d1d1f;
-    --text-muted: #86868b;
-    --glass-border: rgba(0, 0, 0, 0.1);
+    --primary-color: #61432b;
+    --secondary-color: #92817A;
+    --bg-light: #F1DABF;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --text-main: #3e2819;
+    --text-muted: #5d4a3e;
+    --glass-border: rgba(54, 36, 23, 0.1);
     --font-family: 'Outfit', sans-serif;
 }
 
@@ -54,7 +54,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(251, 251, 253, 0.8);
+    background: rgba(241, 218, 191, 0.8);
     backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid var(--glass-border);
@@ -343,7 +343,7 @@ section {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(241, 218, 191, 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 999;
@@ -441,7 +441,7 @@ section {
 }
 
 .btn-primary:hover {
-    box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
+    box-shadow: 0 10px 20px rgba(54, 36, 23, 0.3);
 }
 
 footer {
