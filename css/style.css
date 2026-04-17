@@ -130,6 +130,9 @@ header {
     transition: z-index 0s; /* Instant pop to front */
     border-radius: 20px;
     overflow: hidden;
+    background: transparent;
+    border: none;
+    backface-visibility: hidden;
 }
 
 .hero-img-wrapper:hover {
