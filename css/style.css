@@ -128,6 +128,8 @@ header {
     z-index: 1;
     cursor: pointer;
     transition: z-index 0s; /* Instant pop to front */
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .hero-img-wrapper:hover {
