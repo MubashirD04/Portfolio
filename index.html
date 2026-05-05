@@ -243,6 +243,31 @@
         <p>&copy; 2026 Portfolio. Built with passion and precision.</p>
     </footer>
 
+    <!-- Chatbot Widget -->
+    <div id="chatbot-container">
+        <button id="chat-toggle" title="Chat with me!">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </button>
+        <div id="chat-box" style="display: none;">
+            <div id="chat-header">
+                <h3>Chat Assistant</h3>
+                <button id="chat-close">&times;</button>
+            </div>
+            <div id="chat-messages">
+                <!-- Messages will appear here -->
+                <div class="message bot-message">
+                    <strong>Assistant:</strong> 👋 Hello! I'm an AI assistant powered by Groq. How can I help you today?
+                </div>
+            </div>
+            <div id="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                <button id="chat-send">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
 </body>
 

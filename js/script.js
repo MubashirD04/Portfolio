@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupScrollReveal();
     setupCardExpansion();
     setupTypewriter();
+    setupChatbot();
     console.log("Portfolio Loaded Successfully");
 });
 
@@ -246,3 +247,103 @@ const setupCardExpansion = () => {
     }
 };
 
+/**
+ * Handles the chatbot initialization and logic.
+ */
+const setupChatbot = () => {
+    const VERCEL_API_URL = "https://portfolio-backend-mubashird04-mubashird04s-projects.vercel.app/api/chat";
+
+    const chatToggle = document.getElementById("chat-toggle");
+    const chatBox = document.getElementById("chat-box");
+    const chatClose = document.getElementById("chat-close");
+    const chatInput = document.getElementById("chat-input");
+    const chatSend = document.getElementById("chat-send");
+    const chatMessages = document.getElementById("chat-messages");
+
+    if (!chatToggle || !chatBox || !chatInput || !chatSend || !chatMessages) return;
+
+    // Toggle chat open/close
+    chatToggle.addEventListener("click", () => {
+        const isVisible = chatBox.style.display === "flex";
+        chatBox.style.display = isVisible ? "none" : "flex";
+        if (!isVisible) {
+            chatInput.focus();
+        }
+    });
+
+    chatClose.addEventListener("click", () => {
+        chatBox.style.display = "none";
+    });
+
+    // Send on button click or Enter key
+    chatSend.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") sendMessage();
+    });
+
+    async function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+
+        // Show user message
+        appendMessage("user", userMessage);
+        chatInput.value = "";
+
+        // Show loading indicator
+        const typingId = appendMessage("bot", "...", true);
+
+        try {
+            const response = await fetch(VERCEL_API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage }),
+            });
+
+            if (!response.ok) throw new Error("API error");
+
+            const data = await response.json();
+
+            // Replace the "..." message with the real reply
+            updateMessage(typingId, data.reply);
+        } catch (error) {
+            console.error("Chat Error:", error);
+            updateMessage(typingId, "Sorry, I'm having trouble connecting right now. Please try again later.");
+        }
+    }
+
+    function appendMessage(sender, text, isTyping = false) {
+        const messageDiv = document.createElement("div");
+        const id = Date.now();
+        messageDiv.id = `msg-${id}`;
+        messageDiv.className = `message ${sender}-message ${isTyping ? 'message-typing' : ''}`;
+        
+        // Simple text formatting (replace newlines with <br>)
+        const formattedText = text.replace(/\n/g, '<br>');
+        
+        messageDiv.innerHTML = `<strong>${sender === 'user' ? 'You' : 'Assistant'}:</strong> ${formattedText}`;
+        chatMessages.appendChild(messageDiv);
+        
+        // Smooth scroll to bottom
+        chatMessages.scrollTo({
+            top: chatMessages.scrollHeight,
+            behavior: 'smooth'
+        });
+        
+        return id;
+    }
+
+    function updateMessage(id, text) {
+        const messageDiv = document.getElementById(`msg-${id}`);
+        if (messageDiv) {
+            const formattedText = text.replace(/\n/g, '<br>');
+            messageDiv.innerHTML = `<strong>Assistant:</strong> ${formattedText}`;
+            messageDiv.classList.remove('message-typing');
+            
+            // Scroll again as content height might change
+            chatMessages.scrollTo({
+                top: chatMessages.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    }
+};
