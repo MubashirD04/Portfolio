@@ -283,14 +283,19 @@ const setupChatbot = () => {
 
     async function sendMessage() {
         const userMessage = chatInput.value.trim();
-        if (!userMessage) return;
+        if (!userMessage || chatSend.disabled) return;
 
         // Show user message
         appendMessage("user", userMessage);
         chatInput.value = "";
+        
+        // Disable input and button while waiting
+        chatInput.disabled = true;
+        chatSend.disabled = true;
+        chatSend.style.opacity = "0.5";
 
-        // Show loading indicator
-        const typingId = appendMessage("bot", "...", true);
+        // Show typing indicator
+        const typingId = appendMessage("bot", "Thinking", true);
 
         try {
             const response = await fetch(VERCEL_API_URL, {
@@ -299,15 +304,24 @@ const setupChatbot = () => {
                 body: JSON.stringify({ message: userMessage }),
             });
 
-            if (!response.ok) throw new Error("API error");
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.details || "API error");
+            }
 
             const data = await response.json();
 
-            // Replace the "..." message with the real reply
+            // Replace the "Thinking" message with the real reply
             updateMessage(typingId, data.reply);
         } catch (error) {
             console.error("Chat Error:", error);
-            updateMessage(typingId, "Sorry, I'm having trouble connecting right now. Please try again later.");
+            updateMessage(typingId, "I'm sorry, I'm having trouble connecting to my brain right now. Please try again later!");
+        } finally {
+            // Re-enable input and button
+            chatInput.disabled = false;
+            chatSend.disabled = false;
+            chatSend.style.opacity = "1";
+            chatInput.focus();
         }
     }
 
