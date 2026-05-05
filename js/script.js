@@ -251,7 +251,10 @@ const setupCardExpansion = () => {
  * Handles the chatbot initialization and logic.
  */
 const setupChatbot = () => {
-    const VERCEL_API_URL = "https://portfolio-backend-mubashird04-mubashird04s-projects.vercel.app/api/chat";
+    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    const VERCEL_API_URL = isLocal 
+        ? "http://localhost:3000/api/chat" 
+        : "https://portfolio-backend.vercel.app/api/chat";
 
     const chatToggle = document.getElementById("chat-toggle");
     const chatBox = document.getElementById("chat-box");
@@ -305,8 +308,9 @@ const setupChatbot = () => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.details || "API error");
+                const errorData = await response.json().catch(() => ({}));
+                console.error("API Response Error:", errorData);
+                throw new Error(errorData.details || errorData.error || "API error");
             }
 
             const data = await response.json();
@@ -314,7 +318,10 @@ const setupChatbot = () => {
             // Replace the "Thinking" message with the real reply
             updateMessage(typingId, data.reply);
         } catch (error) {
-            console.error("Chat Error:", error);
+            console.error("Chat Error Context:", {
+                url: VERCEL_API_URL,
+                error: error.message
+            });
             updateMessage(typingId, "I'm sorry, I'm having trouble connecting to my brain right now. Please try again later!");
         } finally {
             // Re-enable input and button
