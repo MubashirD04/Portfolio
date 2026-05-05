@@ -254,7 +254,7 @@ const setupChatbot = () => {
     const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
     const VERCEL_API_URL = isLocal 
         ? "http://localhost:3000/api/chat" 
-        : "https://portfolio-backend.vercel.app/api/chat";
+        : "https://portfolio-backend-smoky-seven.vercel.app/api/chat";
 
     const chatToggle = document.getElementById("chat-toggle");
     const chatBox = document.getElementById("chat-box");
