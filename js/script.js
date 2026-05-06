@@ -3,8 +3,36 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCardExpansion();
     setupTypewriter();
     setupChatbot();
+    setupMobileMenu();
     console.log("Portfolio Loaded Successfully");
 });
+
+/**
+ * Handles the mobile menu toggle logic.
+ */
+const setupMobileMenu = () => {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    const links = document.querySelectorAll('.nav-links a');
+
+    if (!hamburger || !navLinks) return;
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        // Prevent body scrolling when menu is open
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when a link is clicked
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+};
 
 /**
  * Handles the scroll-triggered reveal animations.
@@ -240,9 +268,10 @@ const setupCardExpansion = () => {
     }
 
     function getTargetDimensions() {
+        const isMobile = window.innerWidth <= 768;
         return {
-            width: Math.min(window.innerWidth * 0.9, 900),
-            height: Math.min(window.innerHeight * 0.75, 600)
+            width: isMobile ? window.innerWidth * 0.95 : Math.min(window.innerWidth * 0.9, 900),
+            height: isMobile ? window.innerHeight * 0.85 : Math.min(window.innerHeight * 0.75, 600)
         };
     }
 };

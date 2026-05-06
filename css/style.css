@@ -44,6 +44,8 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 nav {
@@ -90,6 +92,78 @@ nav {
 
 .nav-links a:hover {
     color: var(--secondary-color);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 0;
+}
+
+.hamburger span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-main);
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 15px 5vw;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(209, 150, 83, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+    }
 }
 
 header {
@@ -213,6 +287,12 @@ header {
     padding: 20px 0 0;
 }
 
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+}
+
 .typewriter-prompt {
     color: var(--primary-color);
     font-weight: 700;
@@ -239,6 +319,12 @@ header {
     animation: fadeInUp 1s ease 0.3s forwards;
 }
 
+@media (max-width: 768px) {
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+}
+
 @keyframes fadeInUp {
     to {
         opacity: 1;
@@ -248,6 +334,12 @@ header {
 
 section {
     padding: 70px 10vw;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 50px 5vw;
+    }
 }
 
 .section-title {
@@ -272,8 +364,14 @@ section {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .projects-grid {
@@ -307,6 +405,16 @@ section {
     position: relative;
     cursor: default;
     will-change: transform, box-shadow;
+}
+
+.about-card {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .about-card {
+        font-size: 1.0rem;
+    }
 }
 
 /* Scroll Reveal States */
@@ -397,7 +505,13 @@ section {
     border-top: 1px solid var(--glass-border);
     /* Allow content to scroll if needed within the fixed card */
     overflow-y: auto;
-    max-height: calc(70vh - 150px);
+    max-height: calc(85vh - 150px);
+}
+
+@media (max-width: 768px) {
+    .project-card.expanded .case-study-content {
+        max-height: calc(85vh - 120px);
+    }
 }
 
 .case-study-grid {
@@ -664,9 +778,23 @@ section {
 }
 
 @media (max-width: 480px) {
+    #chatbot-container {
+        bottom: 20px;
+        right: 20px;
+    }
+
     #chat-box {
-        width: calc(100vw - 40px);
-        height: 400px;
-        right: -10px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100vw;
+        height: 80vh;
+        border-radius: 20px 20px 0 0;
+        border-bottom: none;
+    }
+
+    #chat-toggle {
+        width: 50px;
+        height: 50px;
     }
 }
