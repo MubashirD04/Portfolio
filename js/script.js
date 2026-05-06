@@ -1,399 +1,371 @@
-document.addEventListener('DOMContentLoaded', () => {
-    setupScrollReveal();
-    setupCardExpansion();
-    setupTypewriter();
-    setupChatbot();
-    setupMobileMenu();
-    console.log("Portfolio Loaded Successfully");
-});
-
 /**
- * Handles the mobile menu toggle logic.
+ * Portfolio JavaScript
+ * Refactored for modularity, performance, and modern standards.
  */
-const setupMobileMenu = () => {
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
-    const links = document.querySelectorAll('.nav-links a');
 
-    if (!hamburger || !navLinks) return;
+class Portfolio {
+    constructor() {
+        this.isAnimating = false;
+        this.activeCard = null;
+        this.placeholder = null;
+        this.init();
+    }
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        // Prevent body scrolling when menu is open
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    });
-
-    // Close menu when a link is clicked
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.style.overflow = '';
+    init() {
+        document.addEventListener('DOMContentLoaded', () => {
+            this.setupTheme();
+            this.setupScrollReveal();
+            this.setupCardExpansion();
+            this.setupTypewriter();
+            this.setupMobileMenu();
+            this.chatbot = new Chatbot();
+            console.log("Portfolio Initialized");
         });
-    });
-};
+    }
 
-/**
- * Handles the scroll-triggered reveal animations.
- */
-const setupScrollReveal = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    /**
+     * Handles dark/light theme switching with persistence.
+     */
+    setupTheme() {
+        const themeToggle = document.getElementById('theme-toggle');
+        if (!themeToggle) return;
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        this.updateThemeIcon(themeToggle, currentTheme);
+
+        themeToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            this.updateThemeIcon(themeToggle, theme);
         });
-    }, { threshold: 0.1 });
+    }
 
-    document.querySelectorAll('section, .card').forEach(el => {
-        el.classList.add('reveal-hidden');
-        observer.observe(el);
-    });
-};
+    updateThemeIcon(btn, theme) {
+        const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+        const label = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+        btn.innerHTML = `${theme === 'dark' ? sunIcon : moonIcon} <span>${label}</span>`;
+    }
 
-/**
- * Handles typewriter effect for section and hero titles
- */
-const setupTypewriter = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            // Trigger when element is mostly in view
-            if (entry.isIntersecting && !entry.target.classList.contains('typed')) {
-                entry.target.classList.add('typed');
-                typeText(entry.target);
-            }
+    /**
+     * Mobile navigation menu logic.
+     */
+    setupMobileMenu() {
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        if (!hamburger || !navLinks) return;
+
+        const toggleMenu = () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
-    }, { threshold: 0.8 });
+    }
 
-    document.querySelectorAll('.hero-title, .section-title').forEach(el => {
-        el.dataset.text = el.innerText;
-        el.innerText = ''; // Clear existing text immediately
-        observer.observe(el);
-    });
+    /**
+     * Scroll-triggered reveal animations.
+     */
+    setupScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
 
-    function typeText(element) {
+        document.querySelectorAll('section, .card').forEach(el => {
+            el.classList.add('reveal-hidden');
+            observer.observe(el);
+        });
+    }
+
+    /**
+     * Typewriter effect for titles.
+     */
+    setupTypewriter() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('typed')) {
+                    entry.target.classList.add('typed');
+                    this.typeText(entry.target);
+                }
+            });
+        }, { threshold: 0.8 });
+
+        document.querySelectorAll('.hero-title, .section-title').forEach(el => {
+            el.dataset.text = el.innerText;
+            el.innerText = '';
+            observer.observe(el);
+        });
+    }
+
+    typeText(element) {
         const text = element.dataset.text;
-        element.innerHTML = ''; 
-        const promptSpan = document.createElement('span');
-        promptSpan.className = 'typewriter-prompt';
-        promptSpan.innerText = '> ';
+        element.innerHTML = '';
+        const promptSpan = Object.assign(document.createElement('span'), { className: 'typewriter-prompt', innerText: '> ' });
         const textSpan = document.createElement('span');
-        const cursor = document.createElement('span');
-        cursor.className = 'typewriter-cursor';
-        cursor.innerText = '|';
+        const cursor = Object.assign(document.createElement('span'), { className: 'typewriter-cursor', innerText: '|' });
         
-        element.appendChild(promptSpan);
-        element.appendChild(textSpan);
-        element.appendChild(cursor);
+        element.append(promptSpan, textSpan, cursor);
 
         let i = 0;
-
-        function typeChar() {
+        const typeChar = () => {
             if (i < text.length) {
-                textSpan.textContent += text.charAt(i);
-                i++;
-                // Slight random variation in typing speed
-                const speed = Math.random() * 50 + 50; 
-                setTimeout(typeChar, speed);
+                textSpan.textContent += text.charAt(i++);
+                setTimeout(typeChar, Math.random() * 30 + 30);
             } else {
-                // Keep cursor and prompt blinking for a moment, then fade them out
                 setTimeout(() => { 
                     cursor.style.display = 'none'; 
-                    promptSpan.style.display = 'none'; // Make the prompt disappear
-                }, 2000);
+                    promptSpan.style.opacity = '0';
+                    promptSpan.style.transition = 'opacity 0.5s ease';
+                }, 1000);
             }
-        }
-        
-        // Start typing after a short delay
+        };
         setTimeout(typeChar, 400);
     }
-};
 
-/**
- * Handles the FLIP (First, Last, Invert, Play) animation logic for project cards.
- * Uses a 'portal' strategy (moving card to body) to avoid z-index/stacking context issues.
- */
-const setupCardExpansion = () => {
-    let activeCard = null;
-    let placeholder = null;
-    let isAnimating = false;
+    /**
+     * Resilient Card Expansion Logic
+     */
+    setupCardExpansion() {
+        const overlay = Object.assign(document.createElement('div'), { className: 'modal-overlay' });
+        document.body.appendChild(overlay);
 
-    // Create and append the backdrop overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    document.body.appendChild(overlay);
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.explore-btn');
+            if (btn) {
+                const card = btn.closest('.project-card');
+                if (this.isAnimating) return;
+                this.activeCard === card ? this.closeCard(card, btn) : this.openCard(card, btn, overlay);
+                return;
+            }
 
-    // Bind click events to all explore buttons
-    document.querySelectorAll('.explore-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            if (isAnimating) return;
-
-            const card = e.target.closest('.project-card');
-
-            if (activeCard === card) {
-                closeCard(card, btn);
-            } else if (!activeCard) {
-                openCard(card, btn);
+            if (this.activeCard && !this.isAnimating && (e.target === overlay || e.target.closest('.modal-overlay'))) {
+                this.closeCard(this.activeCard, this.activeCard.querySelector('.explore-btn'));
             }
         });
-    });
+    }
 
-    // Close active card when clicking the overlay
-    overlay.addEventListener('click', () => {
-        if (activeCard && !isAnimating) {
-            const btn = activeCard.querySelector('.explore-btn');
-            closeCard(activeCard, btn);
-        }
-    });
+    openCard(card, btn, overlay) {
+        if (this.isAnimating) return;
+        this.isAnimating = true;
+        this.activeCard = card;
 
-    function openCard(card, btn) {
-        isAnimating = true;
-        activeCard = card;
+        // 1. First State
+        const rect = card.getBoundingClientRect();
+        
+        // 2. Create Placeholder
+        this.placeholder = Object.assign(document.createElement('div'), {
+            className: 'project-card project-card-placeholder',
+            style: `width: ${rect.width}px; height: ${rect.height}px;`
+        });
+        card.parentNode.insertBefore(this.placeholder, card);
 
-        // 1. Measure Initial State (First)
-        const startRect = card.getBoundingClientRect();
-
-        // 2. Create Placeholder to maintain grid layout stability
-        placeholder = createPlaceholder(startRect);
-        card.parentNode.insertBefore(placeholder, card);
-
-        // 3. Portal: Move Card to Body (Solves stacking context issues)
+        // 3. Setup Portal
+        Object.assign(card.style, {
+            position: 'fixed',
+            top: `${rect.top}px`,
+            left: `${rect.left}px`,
+            width: `${rect.width}px`,
+            height: `${rect.height}px`,
+            margin: '0',
+            zIndex: '3000'
+        });
+        card.classList.add('fixed-expanding');
         document.body.appendChild(card);
 
-        // 4. Apply Initial Fixed Postion (Invert)
-        setFixedStyles(card, startRect);
-
-        // Force Reflow to ensure browser paints the start state
-        void card.offsetWidth;
-
-        // 5. Animate to Target State (Play)
-        card.classList.add('expanded');
-        btn.textContent = 'Close';
-        overlay.classList.add('active');
-
-        // Calculate flexible target dimensions
-        const { width, height } = getTargetDimensions();
-
-        // Use requestAnimationFrame for smooth animation trigger
+        // 4. Trigger Animation
         requestAnimationFrame(() => {
-            Object.assign(card.style, {
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: `${width}px`,
-                height: `${height}px`
-            });
+            requestAnimationFrame(() => {
+                const { width, height } = this.getTargetDimensions();
+                overlay.classList.add('active');
+                card.classList.add('expanded');
+                btn.textContent = 'Close';
+                document.body.style.overflow = 'hidden';
 
-            // Re-enable interaction after transition roughly completes
-            setTimeout(() => { isAnimating = false; }, 600);
+                Object.assign(card.style, {
+                    top: `${(window.innerHeight - height) / 2}px`,
+                    left: `${(window.innerWidth - width) / 2}px`,
+                    width: `${width}px`,
+                    height: `${height}px`
+                });
+
+                setTimeout(() => { this.isAnimating = false; }, 600);
+            });
         });
     }
 
-    function closeCard(card, btn) {
-        if (!placeholder) return;
-        isAnimating = true;
+    closeCard(card, btn) {
+        if (!this.placeholder || this.isAnimating) return;
+        this.isAnimating = true;
 
-        // 1. Get destination coordinates (placeholder position)
-        const endRect = placeholder.getBoundingClientRect();
+        const rect = this.placeholder.getBoundingClientRect();
+        const overlay = document.querySelector('.modal-overlay');
 
-        // 2. Start Closing State
         card.classList.remove('expanded');
         overlay.classList.remove('active');
+        document.body.style.overflow = '';
         btn.textContent = 'Explore Case Study';
 
-        // 3. Animate back to original position
         Object.assign(card.style, {
-            transform: 'none', // Remove centering transform
-            top: `${endRect.top}px`,
-            left: `${endRect.left}px`,
-            width: `${endRect.width}px`,
-            height: `${endRect.height}px`
+            top: `${rect.top}px`,
+            left: `${rect.left}px`,
+            width: `${rect.width}px`,
+            height: `${rect.height}px`
         });
 
-        // 4. Cleanup after animation ends
-        const onTransitionEnd = (e) => {
-            // Filter out bubbling transition events from children
-            if (e.target !== card) return;
-
-            // Move card back to its original DOM position in the grid
-            if (placeholder && placeholder.parentNode) {
-                placeholder.parentNode.insertBefore(card, placeholder);
-                placeholder.remove();
-                placeholder = null;
-            }
-
-            // Clean up styles
-            removeFixedStyles(card);
-
-            activeCard = null;
-            isAnimating = false;
-            card.removeEventListener('transitionend', onTransitionEnd);
+        const cleanup = () => {
+            if (!this.placeholder) return;
+            this.placeholder.parentNode.insertBefore(card, this.placeholder);
+            this.placeholder.remove();
+            this.placeholder = null;
+            
+            card.classList.remove('fixed-expanding');
+            Object.assign(card.style, {
+                position: '', top: '', left: '', width: '', height: '', margin: '', zIndex: ''
+            });
+            
+            this.activeCard = null;
+            this.isAnimating = false;
         };
 
-        card.addEventListener('transitionend', onTransitionEnd);
+        // Use a timeout as a primary mechanism instead of transitionend for better reliability
+        setTimeout(cleanup, 600);
     }
 
-    // --- Helper Functions ---
-
-    function createPlaceholder(rect) {
-        const p = document.createElement('div');
-        p.className = 'project-card project-card-placeholder';
-        p.style.width = `${rect.width}px`;
-        p.style.height = `${rect.height}px`;
-        return p;
-    }
-
-    function setFixedStyles(card, rect) {
-        card.classList.add('fixed-expanding');
-        card.style.position = 'fixed';
-        card.style.top = `${rect.top}px`;
-        card.style.left = `${rect.left}px`;
-        card.style.width = `${rect.width}px`;
-        card.style.height = `${rect.height}px`;
-        card.style.margin = '0';
-        card.style.transform = 'translate(0, 0)'; // Important for smooth init
-    }
-
-    function removeFixedStyles(card) {
-        card.classList.remove('fixed-expanding');
-        // Clear all inline styles set during animation
-        card.style.position = '';
-        card.style.top = '';
-        card.style.left = '';
-        card.style.width = '';
-        card.style.height = '';
-        card.style.margin = '';
-        card.style.transform = '';
-    }
-
-    function getTargetDimensions() {
+    getTargetDimensions() {
         const isMobile = window.innerWidth <= 768;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
         return {
-            width: isMobile ? window.innerWidth * 0.95 : Math.min(window.innerWidth * 0.9, 900),
-            height: isMobile ? window.innerHeight * 0.85 : Math.min(window.innerHeight * 0.75, 600)
+            width: isMobile ? w * 0.95 : Math.min(w * 0.9, 1100),
+            height: isMobile ? h * 0.9 : Math.min(h * 0.85, 800)
         };
     }
-};
+}
 
 /**
- * Handles the chatbot initialization and logic.
+ * Chatbot Module
  */
-const setupChatbot = () => {
-    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-    const VERCEL_API_URL = isLocal 
-        ? "http://localhost:3000/api/chat" 
-        : "https://portfolio-backend-smoky-seven.vercel.app/api/chat";
-
-    const chatToggle = document.getElementById("chat-toggle");
-    const chatBox = document.getElementById("chat-box");
-    const chatClose = document.getElementById("chat-close");
-    const chatInput = document.getElementById("chat-input");
-    const chatSend = document.getElementById("chat-send");
-    const chatMessages = document.getElementById("chat-messages");
-
-    if (!chatToggle || !chatBox || !chatInput || !chatSend || !chatMessages) return;
-
-    // Toggle chat open/close
-    chatToggle.addEventListener("click", () => {
-        const isVisible = chatBox.style.display === "flex";
-        chatBox.style.display = isVisible ? "none" : "flex";
-        if (!isVisible) {
-            chatInput.focus();
-        }
-    });
-
-    chatClose.addEventListener("click", () => {
-        chatBox.style.display = "none";
-    });
-
-    // Send on button click or Enter key
-    chatSend.addEventListener("click", sendMessage);
-    chatInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") sendMessage();
-    });
-
-    async function sendMessage() {
-        const userMessage = chatInput.value.trim();
-        if (!userMessage || chatSend.disabled) return;
-
-        // Show user message
-        appendMessage("user", userMessage);
-        chatInput.value = "";
+class Chatbot {
+    constructor() {
+        this.apiUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+            ? "http://localhost:3000/api/chat"
+            : "https://portfolio-backend-smoky-seven.vercel.app/api/chat";
         
-        // Disable input and button while waiting
-        chatInput.disabled = true;
-        chatSend.disabled = true;
-        chatSend.style.opacity = "0.5";
+        this.elements = {
+            toggle: document.getElementById("chat-toggle"),
+            box: document.getElementById("chat-box"),
+            close: document.getElementById("chat-close"),
+            input: document.getElementById("chat-input"),
+            send: document.getElementById("chat-send"),
+            messages: document.getElementById("chat-messages")
+        };
 
-        // Show typing indicator
-        const typingId = appendMessage("bot", "Thinking", true);
+        if (this.elements.toggle) this.init();
+    }
 
-        try {
-            const response = await fetch(VERCEL_API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMessage }),
-            });
+    init() {
+        this.elements.toggle.addEventListener("click", () => this.toggleChat());
+        this.elements.close.addEventListener("click", () => this.toggleChat(false));
+        this.elements.send.addEventListener("click", () => this.sendMessage());
+        this.elements.input.addEventListener("keydown", (e) => e.key === "Enter" && this.sendMessage());
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                console.error("API Response Error:", errorData);
-                throw new Error(errorData.details || errorData.error || "API error");
-            }
-
-            const data = await response.json();
-
-            // Replace the "Thinking" message with the real reply
-            updateMessage(typingId, data.reply);
-        } catch (error) {
-            console.error("Chat Error Context:", {
-                url: VERCEL_API_URL,
-                error: error.message
-            });
-            updateMessage(typingId, "I'm sorry, I'm having trouble connecting to my brain right now. Please try again later!");
-        } finally {
-            // Re-enable input and button
-            chatInput.disabled = false;
-            chatSend.disabled = false;
-            chatSend.style.opacity = "1";
-            chatInput.focus();
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', () => this.handleViewportResize());
         }
     }
 
-    function appendMessage(sender, text, isTyping = false) {
-        const messageDiv = document.createElement("div");
+    toggleChat(force) {
+        const isVisible = force !== undefined ? force : this.elements.box.style.display !== "flex";
+        this.elements.box.style.display = isVisible ? "flex" : "none";
+        if (isVisible) this.elements.input.focus();
+    }
+
+    handleViewportResize() {
+        if (window.innerWidth <= 480 && this.elements.box.style.display === "flex") {
+            const offset = window.innerHeight - window.visualViewport.height;
+            this.elements.box.style.bottom = `${offset}px`;
+            this.elements.box.style.height = `${window.visualViewport.height}px`;
+        }
+    }
+
+    async sendMessage() {
+        const text = this.elements.input.value.trim();
+        if (!text || this.elements.send.disabled) return;
+
+        this.appendMessage("user", text);
+        this.elements.input.value = "";
+        this.setLoading(true);
+
+        const typingId = this.appendMessage("bot", "Thinking", true);
+
+        try {
+            const response = await fetch(this.apiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: text }),
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "API Error");
+            this.updateMessage(typingId, data.reply);
+        } catch (error) {
+            this.updateMessage(typingId, "I'm having trouble connecting. Please try again later!");
+            console.error("Chat Error:", error);
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    setLoading(loading) {
+        this.elements.input.disabled = loading;
+        this.elements.send.disabled = loading;
+        this.elements.send.style.opacity = loading ? "0.5" : "1";
+    }
+
+    appendMessage(sender, text, isTyping = false) {
         const id = Date.now();
-        messageDiv.id = `msg-${id}`;
-        messageDiv.className = `message ${sender}-message ${isTyping ? 'message-typing' : ''}`;
-        
-        // Simple text formatting (replace newlines with <br>)
-        const formattedText = text.replace(/\n/g, '<br>');
-        
-        messageDiv.innerHTML = `<strong>${sender === 'user' ? 'You' : 'Assistant'}:</strong> ${formattedText}`;
-        chatMessages.appendChild(messageDiv);
-        
-        // Smooth scroll to bottom
-        chatMessages.scrollTo({
-            top: chatMessages.scrollHeight,
-            behavior: 'smooth'
+        const div = Object.assign(document.createElement("div"), {
+            id: `msg-${id}`,
+            className: `message ${sender}-message ${isTyping ? 'message-typing' : ''}`
         });
-        
+        div.innerHTML = `<strong>${sender === 'user' ? 'You' : 'Assistant'}:</strong> ${text.replace(/\n/g, '<br>')}`;
+        this.elements.messages.appendChild(div);
+        this.scrollToBottom();
         return id;
     }
 
-    function updateMessage(id, text) {
-        const messageDiv = document.getElementById(`msg-${id}`);
-        if (messageDiv) {
-            const formattedText = text.replace(/\n/g, '<br>');
-            messageDiv.innerHTML = `<strong>Assistant:</strong> ${formattedText}`;
-            messageDiv.classList.remove('message-typing');
-            
-            // Scroll again as content height might change
-            chatMessages.scrollTo({
-                top: chatMessages.scrollHeight,
-                behavior: 'smooth'
-            });
+    updateMessage(id, text) {
+        const div = document.getElementById(`msg-${id}`);
+        if (div) {
+            div.innerHTML = `<strong>Assistant:</strong> ${text.replace(/\n/g, '<br>')}`;
+            div.classList.remove('message-typing');
+            this.scrollToBottom();
         }
     }
-};
+
+    scrollToBottom() {
+        this.elements.messages.scrollTo({ top: this.elements.messages.scrollHeight, behavior: 'smooth' });
+    }
+}
+
+// Initialize the Portfolio
+new Portfolio();
