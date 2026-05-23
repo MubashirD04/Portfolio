@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mubashir Dawood | Full Stack Developer & Software Engineer</title>
     <meta name="description"
-        content="Personal portfolio of Mubashir Dawood, a Full Stack Developer specializing in JavaScript, Go, and AI integration. Explore my projects and skills.">
+        content="About Mubashir">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
         <nav>
             <div class="logo-area">
                 <div class="logo">
-                    <img src="assets/favicon.png" alt="Mubashir Dawood Logo" class="logo-img" loading="eager">
+                    <img src="assets/favicon.png" alt="MDLogo" class="logo-img" loading="eager">
                 </div>
                 <span class="logo-divider"></span>
                 <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -54,8 +54,8 @@
                 </div>
 
                 <ul>
-                    <li><a href="index.html" class="current-page" aria-current="page">Home</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="current-page" aria-current="page">About</a></li>
                     <li><a href="skills.html">Skills</a></li>
                     <li><a href="projects.html">Projects</a></li>
                     <li class="nav-theme-item">
@@ -68,9 +68,16 @@
             </div>
         </nav>
 
-        <section id="header">
-            <h1 class="hero-title">Hi, my name is Mubashir</h1>
-            <h3>I'm a wannabe developer from Cape Town, South Africa</h3>
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="card about-card">
+                <p>I'm a Computer Science graduate who finds beauty in the "under the hood" mechanics of software. 
+                    Whether I'm architecting a Go backend, optimizing a data pipeline, or fine-tuning an API, I'm driven by a need for performance and correctness.</p><br>
+                <p>My approach to engineering is heavily influenced by my life outside of the IDE. As a martial arts and fitness enthusiast, I believe in the power of incremental improvement and technical discipline, principles that translate directly to writing clean, maintainable code. 
+                    When I'm not debugging systems or training, you'll likely find me immersed in a complex strategy game or lost in a book.</p><br>
+                <p>I'm on the hunt for a graduate or junior role where I can grow as an engineer while working in a
+                    collaborative, engineering-focused team.</p>
+            </div>
         </section>
 
         <section id="contact">
@@ -98,10 +105,9 @@
             </div>
         </footer>
 
-        <!-- Chatbot Widget -->
         <div id="chatbot-container">
             <button id="chat-toggle" title="Chat with me!">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M3 15a2 2 0 0 0 2 2h12l4 4V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
             </button>
             <div id="chat-box" style="display: none;">
                 <div id="chat-header">
@@ -126,5 +132,4 @@
 
     <script src="js/script.js"></script>
 </body>
-
 </html>

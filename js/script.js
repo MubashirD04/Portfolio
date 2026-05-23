@@ -48,6 +48,11 @@ class Portfolio {
         const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
         const label = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
         btn.innerHTML = `${theme === 'dark' ? sunIcon : moonIcon} <span>${label}</span>`;
+
+        const logoImg = document.querySelector('.logo-img');
+        if (logoImg) {
+            logoImg.src = theme === 'dark' ? 'assets/favicon(bright).png' : 'assets/favicon.png';
+        }
     }
 
     /**
@@ -63,7 +68,6 @@ class Portfolio {
         const toggleMenu = () => {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
         };
 
         hamburger.addEventListener('click', toggleMenu);
@@ -72,7 +76,6 @@ class Portfolio {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
-                document.body.style.overflow = '';
             });
         });
     }
@@ -119,11 +122,25 @@ class Portfolio {
     typeText(element) {
         const text = element.dataset.text;
         element.innerHTML = '';
-        const promptSpan = Object.assign(document.createElement('span'), { className: 'typewriter-prompt', innerText: '> ' });
-        const textSpan = document.createElement('span');
-        const cursor = Object.assign(document.createElement('span'), { className: 'typewriter-cursor', innerText: '|' });
         
-        element.append(promptSpan, textSpan, cursor);
+        // Create a wrapper to keep things grouped and centered
+        const wrapper = document.createElement('span');
+        wrapper.style.display = 'inline-flex';
+        wrapper.style.alignItems = 'center';
+        wrapper.style.justifyContent = 'center';
+
+        const promptSpan = Object.assign(document.createElement('span'), { 
+            className: 'typewriter-prompt', 
+            innerText: '> ' 
+        });
+        const textSpan = document.createElement('span');
+        const cursor = Object.assign(document.createElement('span'), { 
+            className: 'typewriter-cursor', 
+            innerText: '|' 
+        });
+        
+        wrapper.append(promptSpan, textSpan, cursor);
+        element.append(wrapper);
 
         let i = 0;
         const typeChar = () => {
@@ -133,8 +150,20 @@ class Portfolio {
             } else {
                 setTimeout(() => { 
                     cursor.style.display = 'none'; 
-                    promptSpan.style.opacity = '0';
-                    promptSpan.style.transition = 'opacity 0.5s ease';
+                    
+                    // Smoothly collapse the prompt width to 0 so the header snaps perfectly to dead center
+                    promptSpan.style.transition = 'opacity 0.3s ease, width 0.3s ease';
+                    promptSpan.style.display = 'inline-block';
+                    promptSpan.style.overflow = 'hidden';
+                    promptSpan.style.whiteSpace = 'nowrap';
+                    promptSpan.style.width = '1.5rem'; // Give it its starting approximate width
+                    
+                    requestAnimationFrame(() => {
+                        promptSpan.style.width = '0px';
+                        promptSpan.style.opacity = '0';
+                    });
+                    
+                    setTimeout(() => promptSpan.remove(), 300);
                 }, 1000);
             }
         };

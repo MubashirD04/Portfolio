@@ -1,33 +1,39 @@
 /* CSS Design System */
 :root {
-    /* Color Palette - Warm Earthy Tones */
-    --primary-color: #61432b;
-    --primary-light: #8b6b4d;
-    --secondary-color: #92817A;
-    --bg-light: #f1e3d3;
-    --card-bg: rgba(255, 255, 255, 0.6);
-    --card-hover-bg: rgba(255, 255, 255, 0.8);
-    --text-main: #3e2819;
-    --text-muted: #775d4d;
-    --glass-border: rgba(97, 67, 43, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    /* Color Palette - Modern Sky Blue Theme */
+    --primary-color: #4A9FD3;
+    --secondary-color: #3b7fa8;
+    --bg-light: #f4f8fb;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --text-main: #1d2d3a;
+    --text-muted: #536b7e;
+    --glass-border: rgba(74, 159, 211, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(74, 159, 211, 0.08);
+    --nav-bg: rgba(74, 159, 211, 0.85);
+    --nav-links-bg: rgba(106, 171, 211, 0.98);
+    --footer-bg: rgba(74, 159, 211, 0.08);
+    --overlay-bg: rgba(220, 235, 245, 0.6);
     --font-family: 'Outfit', sans-serif;
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="dark"] {
-    --bg-light: #1a1512;
-    --card-bg: rgba(46, 35, 28, 0.6);
-    --card-hover-bg: rgba(62, 47, 37, 0.8);
-    --text-main: #f1e3d3;
-    --text-muted: #b0998a;
-    --glass-border: rgba(241, 227, 211, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --bg-light: #0d131a;
+    --card-bg: rgba(20, 30, 41, 0.6);
+    --text-main: #eef5fa;
+    --text-muted: #9bb1c2;
+    --glass-border: rgba(74, 159, 211, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    --nav-bg: rgba(20, 30, 41, 0.85);
+    --nav-links-bg: rgba(20, 30, 41, 0.98);
+    --footer-bg: rgba(20, 30, 41, 0.4);
+    --overlay-bg: rgba(10, 15, 20, 0.7);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
+    z-index: 9999;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,7 +42,7 @@
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(var(--primary-color), var(--secondary-color));
-    border-radius: 5px;
+    border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -49,32 +55,57 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+.current-page {
+    pointer-events: none; /* Disables all mouse clicks and hovers */
+    cursor: default;       /* Changes pointer back to a normal arrow */
+    opacity: 0.6;          /* Optional: visually visually tones it down */
 }
 
-body {
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Freezes the screen so the border stays static */
     background-color: var(--bg-light);
     color: var(--text-main);
     font-family: var(--font-family);
-    line-height: 1.6;
+}
+
+/* This wrapper acts as your fixed frame AND handles content scrolling */
+#page-wrapper {
+    height: 100vh;
+    overflow-y: scroll; 
     overflow-x: hidden;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+    
+    border: 20px solid #fffdfd; 
+    box-sizing: border-box;
 }
 
 nav {
     position: fixed;
-    top: 0;
-    width: 100%;
+    top: 15px;                 /* Pushes it below the top border */
+    left: 15px;                /* aligns with the inner left edge */
+    width: calc(100% - 42px);  /* Subtracts both borders (30px) + the width of the scrollbar (12px) */
     padding: 20px 10vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(209, 150, 83, 0.804);
-    backdrop-filter: blur(10px);
     z-index: 1000;
-    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 2001; /* Sits elegantly on top of the nav-links drawer (1500) */
+}
+
+.logo-divider {
+    width: 1.5px;
+    height: 22px;
+    background-color: var(--text-muted);
+    opacity: 0.35;
 }
 
 .logo {
@@ -89,7 +120,7 @@ nav {
 .logo-img {
     height: 42px;
     width: auto;
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 .nav-right {
@@ -104,18 +135,11 @@ nav {
     color: var(--text-main);
     cursor: pointer;
     padding: 8px;
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition-smooth);
-    border: 1px solid transparent;
-}
-
-.theme-toggle:hover {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: var(--glass-border);
-    transform: rotate(15deg);
 }
 
 [data-theme="dark"] .theme-toggle:hover {
@@ -143,31 +167,30 @@ nav {
 
 .nav-social a:hover {
     color: var(--primary-color);
-    transform: translateY(-5px) scale(1.1);
 }
 
 .nav-links {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 75%;
-    max-width: 280px;
+    left: -100%;
+    width: 85%;
+    max-width: 320px;
     height: 100vh;
-    background: rgba(209, 150, 83, 0.98);
+    background: var(--nav-links-bg);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.15);
+    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.15);
     z-index: 1500;
     padding: 0;
 }
 
 .nav-links.active {
-    right: 0;
+    left: 0;
 }
 
 .nav-links ul {
@@ -210,11 +233,11 @@ nav {
 }
 
 .nav-theme-item .theme-toggle {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(66, 66, 66, 0.046);
     padding: 10px 25px;
-    border-radius: 30px;
+    border-radius: 10px;
     font-size: 1.1rem;
-    border: 1px solid var(--glass-border);
+    border: none;
     width: auto; /* Label button shouldn't be full width */
 }
 
@@ -222,10 +245,12 @@ nav {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.nav-links a:hover,
-.nav-theme-item .theme-toggle:hover {
-    color: var(--primary-color);
-    transform: translateX(5px);
+.nav-links a:hover {
+    color: #ffffff; /* Goes white on the sky-blue drawer in light mode */
+}
+
+[data-theme="dark"] .nav-links a:hover {
+    color: var(--primary-color); /* Highlights sky-blue on the navy drawer in dark mode */
 }
 
 .hamburger {
@@ -245,7 +270,7 @@ nav {
     width: 100%;
     height: 3px;
     background-color: var(--text-main);
-    border-radius: 10px;
+    border-radius: 0;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
@@ -279,8 +304,10 @@ header {
     align-items: center;
     background: var(--bg-light);
     text-align: center;
-    padding: 80px 20px 40px;
+    padding: 120px 20px 40px;
+    ;
 }
+
 
 .hero-image-container {
     perspective: 1200px;
@@ -298,74 +325,37 @@ header {
     display: flex;
     gap: 20px;
     align-items: center;
-    transform-style: preserve-3d;
-    transform: rotateX(10deg);
 }
 
 .hero-img-wrapper {
     position: relative;
     z-index: 1;
-    cursor: pointer;
-    transition: z-index 0s; /* Instant pop to front */
-    border-radius: 20px;
+    border-radius: 0;
     overflow: hidden;
     background: transparent;
     border: none;
-    backface-visibility: hidden;
-}
-
-.hero-img-wrapper:hover {
-    z-index: 50;
 }
 
 .hero-img {
     width: 380px;
     height: 240px;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: var(--transition-smooth);
     background: white;
-    pointer-events: none; /* Let wrapper handle interactions */
     display: block;
-}
-
-.hero-img-wrapper:nth-child(1) .hero-img {
-    transform: translateZ(-30px) rotateY(20deg);
-}
-
-.hero-img-wrapper:nth-child(2) .hero-img {
-    transform: translateZ(20px) scale(1.05);
-}
-
-.hero-img-wrapper:nth-child(3) .hero-img {
-    transform: translateZ(-30px) rotateY(-20deg);
-}
-
-.hero-img-wrapper:hover .hero-img {
-    transform: translateZ(120px) scale(1.2) rotate(0) !important;
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 1100px) {
     .hero-image-reel {
-        gap: -100px;
+        gap: 15px;
     }
 
     .hero-img {
         width: 320px;
         height: auto;
         aspect-ratio: 16/10;
-    }
-
-    /* Pull side images toward center on hover for better visibility when overlapped */
-    .hero-img-wrapper:nth-child(1):hover .hero-img {
-        transform: translateZ(120px) scale(1.1) translateX(60px) rotate(0) !important;
-    }
-
-    .hero-img-wrapper:nth-child(3):hover .hero-img {
-        transform: translateZ(120px) scale(1.1) translateX(-60px) rotate(0) !important;
     }
 }
 
@@ -453,6 +443,7 @@ section {
     margin-top: 30px;
     text-align: center;
     position: relative;
+    padding-left: 1.5rem;
 }
 
 .section-title::after {
@@ -464,7 +455,7 @@ section {
     width: 60px;
     height: 4px;
     background: var(--primary-color);
-    border-radius: 2px;
+    border-radius: 0;
 }
 
 .grid {
@@ -499,22 +490,13 @@ section {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     padding: 40px;
-    border-radius: 24px;
+    border-radius: 0;
     transition: var(--transition-smooth);
     overflow: hidden;
     position: relative;
     cursor: default;
-    will-change: transform, box-shadow;
-}
-
-.card:hover:not(.expanded, .project-card-placeholder) {
-    transform: translateY(-8px);
-    background: var(--card-hover-bg);
-    border-color: var(--primary-light);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
 }
 
 .about-card {
@@ -541,10 +523,7 @@ section {
 
 
 
-.card:hover:not(.expanded) {
-    transform: translateY(-5px);
-    border-color: var(--primary-color);
-}
+
 
 /* Expansion Logic */
 /* Expansion Logic - FLIP / Overlay */
@@ -598,7 +577,7 @@ section {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(241, 218, 191, 0.6);
+    background: var(--overlay-bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 999;
@@ -688,9 +667,8 @@ section {
 .case-study-info ul li,
 .case-study-tech ul li {
     background: var(--bg-light);
-    border: 1px solid var(--glass-border);
     padding: 5px 15px;
-    border-radius: 20px;
+    border-radius: 0;
     font-size: 0.85rem;
     color: var(--primary-color);
 }
@@ -698,7 +676,7 @@ section {
 .btn {
     display: inline-block;
     padding: 12px 30px;
-    border-radius: 30px;
+    border-radius: 0;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -713,16 +691,12 @@ section {
     color: white;
 }
 
-.btn-primary:hover {
-    box-shadow: 0 10px 20px rgba(54, 36, 23, 0.3);
-}
-
 
 /* Chatbot Widget Styles */
 #chatbot-container {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    right: 35px;
     z-index: 2000;
     font-family: var(--font-family);
 }
@@ -730,7 +704,7 @@ section {
 #chat-toggle {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 30px 30px 3px 30px; /* Round all corners except bottom-right */
     background: var(--primary-color);
     color: white;
     border: none;
@@ -739,11 +713,10 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 #chat-toggle:hover {
-    transform: scale(1.1) rotate(5deg);
     background: var(--secondary-color);
 }
 
@@ -753,16 +726,16 @@ section {
     right: 0;
     width: 350px;
     height: 500px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95); /* Keep elegant solid white background */
     backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
+    border-radius: 12px; /* Slightly rounded corners */
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     transform-origin: bottom right;
     animation: chatAppear 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    color: #1d2d3a; /* Forces text to stay black/dark in both themes */
 }
 
 @keyframes chatAppear {
@@ -821,12 +794,12 @@ section {
 
 #chat-messages::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
+    border-radius: 0;
 }
 
 .message {
     padding: 10px 15px;
-    border-radius: 15px;
+    border-radius: 0;
     max-width: 85%;
     font-size: 0.9rem;
     line-height: 1.4;
@@ -836,15 +809,13 @@ section {
 .bot-message {
     align-self: flex-start;
     background: #f0f0f0;
-    color: var(--text-main);
-    border-bottom-left-radius: 2px;
+    color: #1d2d3a; /* Stays black/dark regardless of global theme */
 }
 
 .user-message {
     align-self: flex-end;
     background: var(--primary-color);
     color: white;
-    border-bottom-right-radius: 2px;
 }
 
 .message-typing {
@@ -879,15 +850,12 @@ section {
 #chat-input {
     flex: 1;
     padding: 10px 15px;
-    border: 1px solid var(--glass-border);
-    border-radius: 25px;
+    border: none;
+    background: #f4f8fb; /* Keeps input background light in both themes for black text legibility */
+    color: #1d2d3a; /* Stays black/dark regardless of global theme */
+    border-radius: 0;
     outline: none;
     font-family: inherit;
-    transition: border-color 0.3s;
-}
-
-#chat-input:focus {
-    border-color: var(--primary-color);
 }
 
 #chat-send {
@@ -896,22 +864,16 @@ section {
     border: none;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-}
-
-#chat-send:hover {
-    transform: scale(1.1);
-    background: var(--secondary-color);
 }
 
 footer {
     padding: 40px 10vw;
-    background: rgba(209, 150, 83, 0.1);
+    background: var(--footer-bg);
     border-top: 1px solid var(--glass-border);
     text-align: center;
 }
