@@ -1,0 +1,40 @@
+/* Skills Page Specific Styles */
+
+.skills-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.skills-image {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.skills-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.skills-list {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.skills-list .card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.skills-list .card svg {
+    color: var(--primary-color);
+}

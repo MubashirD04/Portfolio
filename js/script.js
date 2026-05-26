@@ -15,9 +15,10 @@ class Portfolio {
         document.addEventListener('DOMContentLoaded', () => {
             this.setupTheme();
             this.setupScrollReveal();
-            this.setupCardExpansion();
             this.setupTypewriter();
+            this.setupAccordion();
             this.setupMobileMenu();
+            this.setupScrollIndicator();
             this.chatbot = new Chatbot();
             console.log("Portfolio Initialized");
         });
@@ -100,6 +101,22 @@ class Portfolio {
     }
 
     /**
+     * Hide scroll indicator on scroll
+     */
+    setupScrollIndicator() {
+        const scrollInd = document.querySelector('.scroll-indicator');
+        if (!scrollInd) return;
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                scrollInd.classList.add('hidden-on-scroll');
+            } else {
+                scrollInd.classList.remove('hidden-on-scroll');
+            }
+        });
+    }
+
+    /**
      * Typewriter effect for titles.
      */
     setupTypewriter() {
@@ -163,131 +180,47 @@ class Portfolio {
                         promptSpan.style.opacity = '0';
                     });
                     
-                    setTimeout(() => promptSpan.remove(), 300);
+                    setTimeout(() => {
+                        promptSpan.remove();
+                        if (element.classList.contains('hero-title')) {
+                            const subtitle = document.querySelector('.hero-subtitle');
+                            if (subtitle) subtitle.classList.add('fade-in');
+                            const scrollInd = document.querySelector('.scroll-indicator');
+                            if (scrollInd) scrollInd.classList.add('fade-in');
+                        }
+                    }, 300);
                 }, 1000);
             }
         };
-        setTimeout(typeChar, 400);
+        setTimeout(typeChar, 200);
     }
 
     /**
-     * Resilient Card Expansion Logic
+     * Accordion Logic for Projects
      */
-    setupCardExpansion() {
-        const overlay = Object.assign(document.createElement('div'), { className: 'modal-overlay' });
-        document.body.appendChild(overlay);
-
-        document.addEventListener('click', (e) => {
-            const btn = e.target.closest('.explore-btn');
-            if (btn) {
-                const card = btn.closest('.project-card');
-                if (this.isAnimating) return;
-                this.activeCard === card ? this.closeCard(card, btn) : this.openCard(card, btn, overlay);
-                return;
-            }
-
-            if (this.activeCard && !this.isAnimating && (e.target === overlay || e.target.closest('.modal-overlay'))) {
-                this.closeCard(this.activeCard, this.activeCard.querySelector('.explore-btn'));
-            }
-        });
-    }
-
-    openCard(card, btn, overlay) {
-        if (this.isAnimating) return;
-        this.isAnimating = true;
-        this.activeCard = card;
-
-        // 1. First State
-        const rect = card.getBoundingClientRect();
-        
-        // 2. Create Placeholder
-        this.placeholder = Object.assign(document.createElement('div'), {
-            className: 'project-card project-card-placeholder',
-            style: `width: ${rect.width}px; height: ${rect.height}px;`
-        });
-        card.parentNode.insertBefore(this.placeholder, card);
-
-        // 3. Setup Portal
-        Object.assign(card.style, {
-            position: 'fixed',
-            top: `${rect.top}px`,
-            left: `${rect.left}px`,
-            width: `${rect.width}px`,
-            height: `${rect.height}px`,
-            margin: '0',
-            zIndex: '3000'
-        });
-        card.classList.add('fixed-expanding');
-        document.body.appendChild(card);
-
-        // 4. Trigger Animation
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                const { width, height } = this.getTargetDimensions();
-                overlay.classList.add('active');
-                card.classList.add('expanded');
-                btn.textContent = 'Close';
-                document.body.style.overflow = 'hidden';
-
-                Object.assign(card.style, {
-                    top: `${(window.innerHeight - height) / 2}px`,
-                    left: `${(window.innerWidth - width) / 2}px`,
-                    width: `${width}px`,
-                    height: `${height}px`
+    setupAccordion() {
+        const projects = document.querySelectorAll('.project-card');
+        projects.forEach((card, index) => {
+            const header = card.querySelector('.accordion-header');
+            if (header) {
+                header.addEventListener('click', () => {
+                    const isActive = card.classList.contains('active');
+                    // Close all
+                    projects.forEach(p => p.classList.remove('active'));
+                    // Open if it wasn't active
+                    if (!isActive) {
+                        card.classList.add('active');
+                    }
                 });
-
-                setTimeout(() => { this.isAnimating = false; }, 600);
-            });
+            }
+            
+            // Open first by default
+            if (index === 0) {
+                card.classList.add('active');
+            }
         });
     }
 
-    closeCard(card, btn) {
-        if (!this.placeholder || this.isAnimating) return;
-        this.isAnimating = true;
-
-        const rect = this.placeholder.getBoundingClientRect();
-        const overlay = document.querySelector('.modal-overlay');
-
-        card.classList.remove('expanded');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-        btn.textContent = 'Explore Case Study';
-
-        Object.assign(card.style, {
-            top: `${rect.top}px`,
-            left: `${rect.left}px`,
-            width: `${rect.width}px`,
-            height: `${rect.height}px`
-        });
-
-        const cleanup = () => {
-            if (!this.placeholder) return;
-            this.placeholder.parentNode.insertBefore(card, this.placeholder);
-            this.placeholder.remove();
-            this.placeholder = null;
-            
-            card.classList.remove('fixed-expanding');
-            Object.assign(card.style, {
-                position: '', top: '', left: '', width: '', height: '', margin: '', zIndex: ''
-            });
-            
-            this.activeCard = null;
-            this.isAnimating = false;
-        };
-
-        // Use a timeout as a primary mechanism instead of transitionend for better reliability
-        setTimeout(cleanup, 600);
-    }
-
-    getTargetDimensions() {
-        const isMobile = window.innerWidth <= 768;
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        return {
-            width: isMobile ? w * 0.95 : Math.min(w * 0.9, 1100),
-            height: isMobile ? h * 0.9 : Math.min(h * 0.85, 800)
-        };
-    }
 }
 
 /**

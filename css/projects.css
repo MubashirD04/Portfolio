@@ -1,0 +1,104 @@
+/* Projects Page Specific Styles */
+
+.projects-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.project-card {
+    background: var(--card-bg);
+    z-index: 1;
+    width: 70vw;
+}
+
+.case-study-content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+}
+
+.project-card.active .case-study-content-wrapper {
+    grid-template-rows: 1fr;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.case-study-content {
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-10px);
+}
+
+.project-card.active .case-study-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.accordion-icon::after {
+    content: "+";
+    font-weight: 400;
+    color: var(--primary-color);
+}
+
+.project-card.active .accordion-icon::after {
+    content: "-";
+}
+
+.accordion-header {
+    cursor: pointer;
+}
+
+.accordion-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-title-row h3 {
+    margin: 0;
+}
+
+.accordion-icon {
+    font-size: 1.8rem;
+}
+
+.accordion-desc {
+    margin-top: 10px;
+}
+
+.case-study-info h4,
+.case-study-tech h4 {
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.case-study-info p {
+    margin-bottom: 20px;
+    color: var(--text-muted);
+}
+
+.case-study-tech {
+    margin-top: 20px;
+}
+
+.case-study-info ul,
+.case-study-tech ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.case-study-info ul li,
+.case-study-tech ul li {
+    background: var(--bg-light);
+    padding: 5px 15px;
+    border-radius: 0;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+}
