@@ -98,7 +98,15 @@
 .case-study-tech ul li {
     background: var(--bg-light);
     padding: 5px 15px;
-    border-radius: 0;
+    border-radius: 6px;
     font-size: 0.85rem;
     color: var(--primary-color);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.case-study-info ul li,
+.case-study-tech ul li:hover {
+    background-color: var(--primary-color);
+    color: #ffff;
+    transform: translateY(-1px);
 }

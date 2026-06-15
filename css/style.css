@@ -3,7 +3,7 @@
     /* Color Palette - Modern Sky Blue Theme */
     --primary-color: #4A9FD3;
     --secondary-color: #3b7fa8;
-    --bg-light: #f4f8fb;
+    --bg-light: #f4f8fb; /*#6797b3 */
     --card-bg: rgba(255, 255, 255, 0.7);
     --text-main: #1d2d3a;
     --text-muted: #536b7e;
@@ -56,9 +56,9 @@
 }
 
 .current-page {
-    pointer-events: none; /* Disables all mouse clicks and hovers */
-    cursor: default;       /* Changes pointer back to a normal arrow */
-    opacity: 0.6;          /* Optional: visually visually tones it down */
+    pointer-events: none; 
+    cursor: default;       
+    opacity: 0.6;          
 }
 
 html, body {
@@ -163,10 +163,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: auto;
 }
 
 .nav-social a:hover {
-    color: var(--primary-color);
+    transform: translateY(-4px); /* Moves the icon smoothly upward */
 }
 
 .nav-links {
@@ -206,9 +207,15 @@ nav {
 }
 
 .nav-links li {
-    width: 100%;
+    width: max-content;
     display: flex;
     justify-content: center;
+    transition: transform 0.3s ease;
+    margin: 5px auto;
+}
+
+.nav-links li:not(.nav-theme-item):not(:has(.current-page)):hover {
+    transform: translateX(6px);
 }
 
 .nav-links a,
@@ -222,7 +229,7 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    width: 100%;
+    width: auto;
 }
 
 .nav-theme-item {
@@ -246,7 +253,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: #ffffff; /* Goes white on the sky-blue drawer in light mode */
+    color: #ffffff; 
 }
 
 [data-theme="dark"] .nav-links a:hover {

@@ -14,8 +14,8 @@
 
 #header {
     flex: 0 1 auto;
-    min-width: 300px;
-    max-width: 550px;
+    width: 550px;
+    max-width: 100%;
     text-align: left;
     padding: 0;
 }
@@ -23,7 +23,7 @@
 .hero-tiger-wrapper {
     flex: 0 1 auto;
     min-width: 300px;
-    max-height: 55vh;
+    max-height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;

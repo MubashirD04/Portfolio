@@ -192,7 +192,7 @@ class Portfolio {
                 }, 1000);
             }
         };
-        setTimeout(typeChar, 200);
+        setTimeout(typeChar, 180);
     }
 
     /**
