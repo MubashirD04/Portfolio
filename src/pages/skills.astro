@@ -1,5 +1,7 @@
 ---
 import Layouts from "../layouts/layouts.astro";
+import tiger_img from "../assets/Tiger/tiger_bgr1.png";
+import { Image } from "astro:assets";
 ---
 
 <Layouts title="Mubashir Dawood | Full Stack Developer & Software Engineer" description="Mubashir's Skills">
@@ -7,7 +9,7 @@ import Layouts from "../layouts/layouts.astro";
         <h2 class="section-title">Toolkit</h2>
         <div class="skills-content">
             <div class="skills-image">
-                <img src="assets/Tiger/tiger_bgr1.png" alt="Tiger Kick">
+                <Image src={tiger_img} alt="Tiger Kick" loading={"eager"}>
             </div>
             <div class="skills-list">
                 <div class="card">
@@ -21,7 +23,8 @@ import Layouts from "../layouts/layouts.astro";
                         <span class="skill-tag">JavaScript</span>
                         <span class="skill-tag">TypeScript</span>
                         <span class="skill-tag">React</span>
-                        <span class="skill-tag">Vue</span>
+                        <span class="skill-tag">SvelteKit</span>
+                        <span class="skill-tag">Astro</span>
                     </div>
                 </div>
                 <div class="card">

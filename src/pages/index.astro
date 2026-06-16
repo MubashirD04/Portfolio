@@ -1,5 +1,7 @@
 ---
 import Layouts from "../layouts/layouts.astro";
+import { Image } from "astro:assets";
+import tiger_pc from "../assets/Tiger/Tiger_pc_bgr.png"
 ---
 
 <Layouts title="Mubashir Dawood | Full Stack Developer & Software Engineer" description="Personal portfolio of Mubashir Dawood, a Full Stack Developer specializing in JavaScript, Go, and AI integration. Explore my projects and skills.">
@@ -9,7 +11,7 @@ import Layouts from "../layouts/layouts.astro";
             <h3 class="hero-subtitle">I'm a wannabe developer from Cape Town,<br> South Africa</h3>
         </section>
         <div class="hero-tiger-wrapper">
-            <img src="assets/Tiger/Tiger_pc_bgr.png" alt="Tiger" class="hero-tiger-img">
+            <Image src={tiger_pc} alt="Tiger" class="hero-tiger-img" loading={"eager"}/>
         </div>
         <div class="scroll-indicator">
             <div class="mouse"></div>
