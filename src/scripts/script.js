@@ -1,6 +1,5 @@
 /**
  * Portfolio JavaScript
- * Refactored for modularity, performance, and modern standards.
  */
 
 class Portfolio {
@@ -129,7 +128,7 @@ class Portfolio {
             });
         }, { threshold: 0.8 });
 
-        document.querySelectorAll('.hero-title, .section-title').forEach(el => {
+        document.querySelectorAll('.hero-title, .section-title, .about-heading').forEach(el => {
             el.dataset.text = el.innerText;
             el.innerText = '';
             observer.observe(el);

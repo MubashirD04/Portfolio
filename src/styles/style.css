@@ -3,10 +3,11 @@
     /* Color Palette - Modern Sky Blue Theme */
     --primary-color: #4A9FD3;
     --secondary-color: #3b7fa8;
-    --bg-light: #f4f8fb; /*#6797b3 */
+    --bg-light: #eff8fd; /*#6797b3 */
     --card-bg: rgba(255, 255, 255, 0.7);
-    --text-main: #1d2d3a;
-    --text-muted: #536b7e;
+    --text-main: #053155;
+    --text-light: #0e669d;
+    --text-muted: #476278;
     --glass-border: rgba(74, 159, 211, 0.15);
     --glass-shadow: 0 8px 32px 0 rgba(74, 159, 211, 0.08);
     --nav-bg: rgba(74, 159, 211, 0.85);
@@ -69,6 +70,10 @@ html, body {
     background-color: var(--bg-light);
     color: var(--text-main);
     font-family: var(--font-family);
+}
+
+main {
+    flex: 1;
 }
 
 /* This wrapper acts as your fixed frame AND handles content scrolling */
@@ -599,6 +604,8 @@ section {
 }
 
 footer {
+    position:relative;
+    margin-top: 1rem;
     padding: 40px 10vw;
     background: var(--footer-bg);
     border-top: 1px solid var(--glass-border);

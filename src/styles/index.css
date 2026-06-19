@@ -92,7 +92,7 @@
 
 .scroll-indicator {
     position: absolute;
-    bottom: 150px;
+    bottom: 15vh;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
@@ -140,11 +140,6 @@
     animation: scrollWheel 1.5s infinite;
 }
 
-@media (max-width: 768px) {
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-}
 
 @keyframes fadeInUp {
     to {
@@ -152,3 +147,81 @@
         transform: translateY(0);
     }
 }
+
+#about-cta {
+    padding: 200px 24vh 0;
+}
+
+#about-cta h1 {
+    position: relative;
+    padding-bottom: 12px;
+    display: inline-block;
+    font-size: 42px;
+}
+
+#about-cta h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 35px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 0;
+}
+
+.about-text {
+    font-size: 1.2rem;
+    padding: 24px 40% 10px 0;
+    line-height: 1.5;
+}
+
+.mobile-inline {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+  .mobile-inline {
+    display: inline; 
+  }
+
+  #about-cta {
+    padding: 100px 11vh ;
+    }
+
+  .about-text {
+    padding: 24px 0 10px 0;
+  }
+}
+
+.about-cta-button {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 2px solid var(--primary-color);
+    border-radius: 7px;
+    background-color: var(--bg-light);
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 18px;   
+    transition: background-color 0.2s ease;
+}
+
+.about-cta-button:hover {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    background-color: #f2f6f9;
+    box-shadow: 0 30px 50px rgb(250, 250, 250);
+}
+
+#current-focus {
+    padding-top: 5rem;
+}
+
+.current-focus-wrapper {
+    font-size: 1.1rem;
+    /* justify-content: center; */
+    text-align: center;
+}
+
