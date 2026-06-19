@@ -16,6 +16,8 @@
     --overlay-bg: rgba(220, 235, 245, 0.6);
     --font-family: 'Outfit', sans-serif;
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --line-height: 1.5;
+    --font-size: 1.2rem;
 }
 
 [data-theme="dark"] {
