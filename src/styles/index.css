@@ -149,14 +149,14 @@
 }
 
 #about-cta {
-    padding: 200px 24vh 0;
+    padding: 200px 24vh 130px;
 }
 
 #about-cta h1 {
     position: relative;
-    padding-bottom: 12px;
+    padding-bottom: 10px;
     display: inline-block;
-    font-size: 42px;
+    font-size: 56px;
 }
 
 #about-cta h1::after {
@@ -225,6 +225,10 @@
     }
 }
 
+.current-focus h1 {
+    font-size: 56px;
+}
+
 .current-focus-subtitle {
     font-size: var(--font-size);
     text-align: center;
@@ -271,5 +275,7 @@
     color: var(--primary-color);
 }
 
-
+#contact {
+    padding-top: 220px;
+}
 
