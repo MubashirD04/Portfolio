@@ -173,17 +173,21 @@ const path = Astro.url.pathname;
               <a href="/" class={path === "/" ? "current-page" : ""}>Home</a>
             </li>
             <li>
-              <a href="/about" class={path === "/about" ? "current-page" : ""}
-                >About</a>
+              <a href="/about" class={path === "/about/" ? "current-page" : ""}
+                >About</a
+              >
             </li>
             <li>
-              <a href="/skills" class={path === "/skills" ? "current-page" : ""}
-                >Skills</a>
+              <a
+                href="/skills"
+                class={path === "/skills/" ? "current-page" : ""}>Skills</a
+              >
             </li>
             <li>
               <a
                 href="/projects"
-                class={path === "/projects" ? "current-page" : ""}>Projects</a>
+                class={path === "/projects/" ? "current-page" : ""}>Projects</a
+              >
             </li>
             <li class="nav-theme-item">
               <button
