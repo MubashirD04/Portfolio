@@ -1,128 +1,289 @@
 ---
-import '../styles/style.css';
-import '../styles/index.css';
-import '../styles/about.css';
-import '../styles/skills.css';
-import '../styles/projects.css';
-import { ClientRouter } from 'astro:transitions';
+import "../styles/style.css";
+import "../styles/index.css";
+import "../styles/about.css";
+import "../styles/skills.css";
+import "../styles/projects.css";
+import { ClientRouter } from "astro:transitions";
 
 const { title, description } = Astro.props;
 const path = Astro.url.pathname;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="description"
-        content={description}>
+    <meta name="description" content={description} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="icon" type="image/png" href="/assets/favicon.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" type="image/png" href="/assets/favicon(bright).png" media="(prefers-color-scheme: dark)">
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/favicon.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/favicon(bright).png"
+      media="(prefers-color-scheme: dark)"
+    />
     <ClientRouter />
     <script is:inline>
-        const theme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', theme);
+      const theme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", theme);
     </script>
-</head>
+  </head>
 
-
-<body>
+  <body>
     <div id="page-wrapper">
-        <nav>
-            <div class="logo-area">
-                <div class="logo">
-                    <img src="assets/favicon.png" alt="Mubashir Dawood Logo" class="logo-img logo-light" loading="eager">
-                    <img src="assets/favicon(bright).png" alt="Mubashir Dawood Logo" class="logo-img logo-dark" loading="eager">
-                </div>
-                <span class="logo-divider"></span>
-                <button class="hamburger" id="hamburger" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-
-            <div class="nav-links" id="nav-links">
-                <div class="nav-social">
-                    <a href="https://github.com/MubashirD04" target="_blank" title="GitHub" aria-label="GitHub Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/mubashir-dawood-2b2a79206/" target="_blank" title="LinkedIn" aria-label="LinkedIn Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </a>
-                    <a href="https://wa.me/27827605538" title="WhatsApp" aria-label="Message Me">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
-                            <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
-                        </svg>
-                    </a>
-                    <a href="mailto:mubashir.dawood4@gmail.com" title="Email" aria-label="Email Me">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    </a>
-                </div>
-
-                <ul>
-                    <li><a href="/" class={path === '/' ? 'current-page' : ''}>Home</a></li>
-                    <li><a href="/about" class={path === '/about' ? 'current-page' : ''}>About</a></li>
-                    <li><a href="/skills" class={path === '/skills' ? 'current-page' : ''}>Skills</a></li>
-                    <li><a href="/projects" class={path === '/projects' ? 'current-page' : ''}>Projects</a></li>
-                    <li class="nav-theme-item">
-                        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                            <span>Switch Theme</span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        
-        <main>
-            <slot/>
-        </main>
-        
-        <footer>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Mubashir Dawood. All rights reserved.</p>
-                <p>Built with Passion & Precision</p>
-            </div>
-        </footer>
-
-        <!-- Chatbot Widget -->
-        <div id="chatbot-container">
-            <button id="chat-toggle" title="Chat with me!">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M3 15a2 2 0 0 0 2 2h12l4 4V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"></path></svg>
-            </button>
-            <div id="chat-box" style="display: none;">
-                <div id="chat-header">
-                    <h3>Chat Assistant</h3>
-                    <button id="chat-close">&times;</button>
-                </div>
-                <div id="chat-messages">
-                    <!-- Messages will appear here -->
-                    <div class="message bot-message">
-                        <strong>Assistant:</strong> 👋 Hello! I'm an AI assistant powered by Groq. How can I help you today?
-                    </div>
-                </div>
-                <div id="chat-input-container">
-                    <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
-                    <button id="chat-send">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                    </button>
-                </div>
-            </div>
+      <nav>
+        <div class="logo-area">
+          <div class="logo">
+            <img
+              src="/assets/favicon.png"
+              alt="Mubashir Dawood Logo"
+              class="logo-img logo-light"
+              loading="eager"
+            />
+            <img
+              src="/assets/favicon(bright).png"
+              alt="Mubashir Dawood Logo"
+              class="logo-img logo-dark"
+              loading="eager"
+            />
+          </div>
+          <span class="logo-divider"></span>
+          <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
+
+        <div class="nav-links" id="nav-links">
+          <div class="nav-social">
+            <a
+              href="https://github.com/MubashirD04"
+              target="_blank"
+              title="GitHub"
+              aria-label="GitHub Profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-github"
+                aria-hidden="true"
+                ><path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                ></path></svg
+              >
+            </a>
+            <a
+              href="https://www.linkedin.com/in/mubashir-dawood-2b2a79206/"
+              target="_blank"
+              title="LinkedIn"
+              aria-label="LinkedIn Profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-linkedin"
+                aria-hidden="true"
+                ><path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path><rect x="2" y="9" width="4" height="12"></rect><circle
+                  cx="4"
+                  cy="4"
+                  r="2"></circle></svg
+              >
+            </a>
+            <a
+              href="https://wa.me/27827605538"
+              title="WhatsApp"
+              aria-label="Message Me"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path>
+                <path
+                  d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="mailto:mubashir.dawood4@gmail.com"
+              title="Email"
+              aria-label="Email Me"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-mail"
+                aria-hidden="true"
+                ><path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path><polyline points="22,6 12,13 2,6"></polyline></svg
+              >
+            </a>
+          </div>
+
+          <ul>
+            <li>
+              <a href="/" class={path === "/" ? "current-page" : ""}>Home</a>
+            </li>
+            <li>
+              <a href="/about" class={path === "/about" ? "current-page" : ""}
+                >About</a>
+            </li>
+            <li>
+              <a href="/skills" class={path === "/skills" ? "current-page" : ""}
+                >Skills</a>
+            </li>
+            <li>
+              <a
+                href="/projects"
+                class={path === "/projects" ? "current-page" : ""}>Projects</a>
+            </li>
+            <li class="nav-theme-item">
+              <button
+                id="theme-toggle"
+                class="theme-toggle"
+                aria-label="Toggle Dark Mode"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-moon"
+                  ><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                  ></path></svg
+                >
+                <span>Switch Theme</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Mubashir Dawood. All rights reserved.</p>
+          <p>Built with Passion & Precision</p>
+        </div>
+      </footer>
+
+      <!-- Chatbot Widget -->
+      <div id="chatbot-container">
+        <button id="chat-toggle" title="Chat with me!">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-message-square"
+            ><path
+              d="M3 15a2 2 0 0 0 2 2h12l4 4V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"
+            ></path></svg
+          >
+        </button>
+        <div id="chat-box" style="display: none;">
+          <div id="chat-header">
+            <h3>Chat Assistant</h3>
+            <button id="chat-close">&times;</button>
+          </div>
+          <div id="chat-messages">
+            <!-- Messages will appear here -->
+            <div class="message bot-message">
+              <strong>Assistant:</strong> 👋 Hello! I'm an AI assistant powered by
+              Groq. How can I help you today?
+            </div>
+          </div>
+          <div id="chat-input-container">
+            <input
+              type="text"
+              id="chat-input"
+              placeholder="Type a message..."
+              autocomplete="off"
+            />
+            <button id="chat-send">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-send"
+                ><line x1="22" y1="2" x2="11" y2="13"></line><polygon
+                  points="22 2 15 22 11 13 2 9 22 2"></polygon></svg
+              >
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script>import '../scripts/script.js';</script>
-</body>
-
+    <script>
+      import "../scripts/script.js";
+    </script>
+  </body>
 </html>
