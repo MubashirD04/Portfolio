@@ -4,6 +4,7 @@ import '../styles/index.css';
 import '../styles/about.css';
 import '../styles/skills.css';
 import '../styles/projects.css';
+import { ClientRouter } from 'astro:transitions';
 
 const { title, description } = Astro.props;
 const path = Astro.url.pathname;
@@ -25,6 +26,11 @@ const path = Astro.url.pathname;
 
     <link rel="icon" type="image/png" href="/assets/favicon.png" media="(prefers-color-scheme: light)">
     <link rel="icon" type="image/png" href="/assets/favicon(bright).png" media="(prefers-color-scheme: dark)">
+    <ClientRouter />
+    <script is:inline>
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
 </head>
 
 
@@ -33,7 +39,8 @@ const path = Astro.url.pathname;
         <nav>
             <div class="logo-area">
                 <div class="logo">
-                    <img src="assets/favicon.png" alt="Mubashir Dawood Logo" class="logo-img" loading="eager">
+                    <img src="assets/favicon.png" alt="Mubashir Dawood Logo" class="logo-img logo-light" loading="eager">
+                    <img src="assets/favicon(bright).png" alt="Mubashir Dawood Logo" class="logo-img logo-dark" loading="eager">
                 </div>
                 <span class="logo-divider"></span>
                 <button class="hamburger" id="hamburger" aria-label="Menu">

@@ -130,6 +130,18 @@ nav {
     border-radius: 0;
 }
 
+.logo-dark {
+    display: none;
+}
+
+[data-theme="dark"] .logo-light {
+    display: none;
+}
+
+[data-theme="dark"] .logo-dark {
+    display: block;
+}
+
 .nav-right {
     display: flex;
     align-items: center;
@@ -313,7 +325,7 @@ nav {
 
 
 section {
-    padding: 70px 10vw;
+    padding: 30px 10vw;
 }
 
 @media (max-width: 768px) {

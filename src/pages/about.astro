@@ -2,34 +2,143 @@
 import Layouts from "../layouts/layouts.astro";
 ---
 
-<Layouts title='Mubashir Dawood | Full Stack Developer & Software Engineer' description="About Mubashir, motivations and hobbies">
-    <section id="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-card">
-            <p>I'm a Computer Science graduate who finds beauty in the "under the hood" mechanics of software. 
-                Whether I'm architecting a Go backend, optimizing a data pipeline, or fine-tuning an API, I'm driven by a need for performance and correctness.</p><br>
-            <p>My approach to engineering is influenced by my life outside of the IDE. As a martial arts and fitness enthusiast, I believe in the power of incremental improvement and technical discipline, principles that translate directly to writing clean, maintainable code. 
-                When I'm not debugging systems or training, you'll likely find me absorbed in a strategy game or lost in a book.</p><br>
-            <p>I'm on the hunt for a graduate or junior role where I can grow as an engineer while working in a
-                collaborative, engineering-focused team.</p>
-        </div>
-    </section>
+<Layouts
+  title="Mubashir Dawood | Full Stack Developer & Software Engineer"
+  description="About Mubashir, motivations and hobbies"
+>
+  <h2 class="section-title">About Me</h2>
 
-    <section id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
-            <p style="margin-bottom: 20px;">Interested in working together? Let's build something extraordinary.</p>
-            <p><strong>LinkedIn:</strong> 
-                <a href="https://www.linkedin.com/in/mubashir-dawood-2b2a79206/" style="color: var(--primary-color);" target="_blank" rel="noopener noreferrer">linkedin.com/in/mubashir-dawood-a1b2c3d4/</a>
-            </p>
-            <p><strong>Email:</strong> mubashir.dawood4@gmail.com</p>
-            <p><strong>GitHub:</strong> 
-                <a href="https://github.com/MubashirD04" style="color: var(--primary-color);" target="_blank" rel="noopener noreferrer">github.com/MubashirD04</a>
-            </p>
-            <p><strong>WhatsApp:</strong>
-                <a href="https://wa.me/27827605538" style="color: var(--primary-color);" target="_blank" rel="noopener noreferrer">+27 82 760 5538</a>
-            </p>
-            <a href="mailto:mubashir.dawood4@gmail.com" class="btn btn-primary">Send a Message</a>
+  <div class="profile-card game-card">
+    <div class="card-header">
+      <small>Class: Software Engineer</small>
+      <h2>Mubashir</h2>
+    </div>
+
+    <div class="profile-grid">
+      <div class="avatar">
+        <span>🕹️</span>
+        <b>LVL 4</b>
+      </div>
+
+      <div class="perks">
+        <div>
+          <span class="perk-bullet" style="--clr: #4ade80">⚡</span> +50% Async Performance
         </div>
-    </section>
+        <div>
+          <span class="perk-bullet" style="--clr: #fbbf24">🥊</span> Muay Thai Stance
+        </div>
+        <div>
+          <span class="perk-bullet" style="--clr: #f87171">🚗</span> Track Tuned Iteration
+        </div>
+      </div>
+    </div>
+
+    <!-- Attributes -->
+    <div class="attributes">
+      <h3>Attributes</h3>
+
+      <div class="stat">
+        <label>Backend / Systems <span>80/100</span></label>
+        <div class="bar">
+          <div class="fill" style="--clr: var(--primary-color); --val: 80%">
+          </div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <label>Frontend / UI <span>60/100</span></label>
+        <div class="bar">
+          <div class="fill" style="--clr: #10b981; --val: 60%"></div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <label>Data & Analytics <span>70/100</span></label>
+        <div class="bar">
+          <div class="fill" style="--clr: #a855f7; --val: 70%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory -->
+    <div class="inventory">
+      <h3>Equipped Inventory</h3>
+      <div class="tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SvelteKit</span>
+        <span class="skill-tag">Astro</span>
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">Go</span>
+        <span class="skill-tag">HuggingFace</span>
+        <span class="skill-tag">Groq</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="about-card">
+      <p>
+        I'm a Computer Science graduate who finds beauty in the "under the hood"
+        mechanics of software. Whether I'm architecting a Go backend, optimizing
+        a data pipeline, or fine-tuning an API, I'm driven by a need for
+        performance and correctness.
+      </p><br />
+      <p>
+        My approach to engineering is influenced by my life outside of the IDE.
+        As a martial arts and fitness enthusiast, I believe in the power of
+        incremental improvement and technical discipline, principles that
+        translate directly to writing clean, maintainable code. When I'm not
+        debugging systems or training, you'll likely find me absorbed in a
+        strategy game or lost in a book.
+      </p><br />
+      <p>
+        I'm on the hunt for a graduate or junior role that has an
+        engineering-focused team where I can dig deep into backend services,
+        systems programming, or data-driven application development.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <div
+      class="card"
+      style="max-width: 600px; margin: 0 auto; text-align: center;"
+    >
+      <p style="margin-bottom: 20px;">
+        Interested in working together? Let's build something extraordinary.
+      </p>
+      <p>
+        <strong>LinkedIn:</strong>
+        <a
+          href="https://www.linkedin.com/in/mubashir-dawood-2b2a79206/"
+          style="color: var(--primary-color);"
+          target="_blank"
+          rel="noopener noreferrer">linkedin.com/in/mubashir-dawood-a1b2c3d4/</a
+        >
+      </p>
+      <p><strong>Email:</strong> mubashir.dawood4@gmail.com</p>
+      <p>
+        <strong>GitHub:</strong>
+        <a
+          href="https://github.com/MubashirD04"
+          style="color: var(--primary-color);"
+          target="_blank"
+          rel="noopener noreferrer">github.com/MubashirD04</a
+        >
+      </p>
+      <p>
+        <strong>WhatsApp:</strong>
+        <a
+          href="https://wa.me/27827605538"
+          style="color: var(--primary-color);"
+          target="_blank"
+          rel="noopener noreferrer">+27 82 760 5538</a
+        >
+      </p>
+      <a href="mailto:mubashir.dawood4@gmail.com" class="btn btn-primary"
+        >Send a Message</a
+      >
+    </div>
+  </section>
 </Layouts>

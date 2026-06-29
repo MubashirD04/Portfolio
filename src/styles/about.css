@@ -9,3 +9,134 @@
         font-size: 1.0rem;
     }
 }
+
+/* Game Card Component Styles */
+.game-card {
+  max-width: 360px;
+  margin: 40px auto;
+  background: var(--card-bg);                 /* Seamless dark/light theme tracking */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 24px;
+  color: var(--text-main);
+  font-family: var(--font-family);            /* Syncs with your Outfit font token */
+  box-sizing: border-box;
+  transition: var(--transition-smooth);       /* Leverages your exact transition speed */
+}
+
+.game-card .card-header { 
+  border-bottom: 1px solid var(--glass-border); 
+  padding-bottom: 8px; 
+  margin-bottom: 16px; 
+}
+.game-card .card-header small { 
+  color: var(--text-light); 
+  text-transform: uppercase; 
+  font-weight: 700; 
+  font-size: 0.75rem; 
+  letter-spacing: 0.05em;
+}
+.game-card .card-header h2 { 
+  margin: 4px 0 0; 
+  text-transform: uppercase; 
+  font-size: 1.8rem; 
+  font-weight: 700;
+}
+
+.game-card .profile-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 2fr; 
+  gap: 16px; 
+  margin-bottom: 20px; 
+}
+
+.game-card .avatar {
+  aspect-ratio: 1;
+  background: var(--footer-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-size: 28px;
+}
+.game-card .avatar b { 
+  position: absolute; 
+  bottom: 0; 
+  width: 100%; 
+  background: var(--primary-color); 
+  color: #fff; 
+  font-size: 10px; 
+  text-align: center; 
+  padding: 2px 0; 
+  text-transform: uppercase;
+}
+
+.game-card .perks { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  gap: 6px; 
+  font-size: 0.85rem; 
+  color: var(--text-muted);
+}
+.game-card .perk-bullet {
+  color: var(--clr);
+  margin-right: 4px;
+  font-weight: bold;
+}
+
+.game-card .attributes, 
+.game-card .inventory { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  margin-top: 16px; 
+}
+.game-card .attributes h3, 
+.game-card .inventory h3 { 
+  font-size: 0.75rem; 
+  color: var(--text-light); 
+  text-transform: uppercase; 
+  margin: 0; 
+  letter-spacing: 0.05em;
+}
+
+.game-card .stat label { 
+  display: flex; 
+  justify-content: space-between; 
+  font-size: 0.8rem; 
+  font-weight: 600; 
+  color: var(--text-main);
+  margin-bottom: 6px; 
+}
+.game-card .stat label span {
+  color: var(--text-muted);
+}
+
+.game-card .bar { 
+  height: 6px; 
+  background: var(--footer-bg); 
+  border: 1px solid var(--glass-border); 
+  overflow: hidden; 
+}
+
+.game-card .fill {
+  height: 100%;
+  background-color: var(--clr);
+  width: 0%; 
+  transition: width 1.2s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.game-card .inventory { 
+  border-top: 1px solid var(--glass-border); 
+  padding-top: 12px; 
+}
+.game-card .tags { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 6px; 
+}

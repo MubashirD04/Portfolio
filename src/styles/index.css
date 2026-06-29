@@ -221,7 +221,7 @@
 
 @media (max-width:1100px) {
     #current-focus {
-        padding: 0 9vh;
+        padding: 10px 9vh;
     }
 }
 
