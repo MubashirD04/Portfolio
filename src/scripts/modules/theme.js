@@ -2,18 +2,20 @@ export function setupTheme() {
     const themeToggle = document.getElementById('theme-toggle');
     if (!themeToggle) return;
 
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeToggleLabel(themeToggle, currentTheme);
+
     themeToggle.addEventListener('click', (e) => {
         e.stopPropagation();
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+        
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeToggleLabel(themeToggle, newTheme);
     });
-
-    // Sync label state on load
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    updateThemeToggleLabel(themeToggle, currentTheme);
 }
 
 function updateThemeToggleLabel(btn, theme) {

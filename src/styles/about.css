@@ -10,20 +10,18 @@
     }
 }
 
-/* Game Card Component Styles */
 .game-card {
   max-width: 360px;
   margin: 40px auto;
-  background: var(--card-bg);                 /* Seamless dark/light theme tracking */
+  background: var(--card-bg);                 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  /* border: 1px solid var(--glass-border); */
   box-shadow: var(--glass-shadow);
   padding: 24px;
   color: var(--text-main);
-  font-family: var(--font-family);            /* Syncs with your Outfit font token */
+  font-family: var(--font-family);           
   box-sizing: border-box;
-  transition: var(--transition-smooth);       /* Leverages your exact transition speed */
+  transition: var(--transition-smooth);      
 }
 
 .game-card .card-header { 

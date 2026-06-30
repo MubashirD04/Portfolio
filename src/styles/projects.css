@@ -8,7 +8,7 @@
 .project-card {
     background: var(--card-bg);
     z-index: 1;
-    width: 70vw;
+    width: 80vw;
 }
 
 .case-study-content-wrapper {

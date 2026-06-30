@@ -634,3 +634,9 @@ footer {
 .footer-bottom p {
     margin: 5px 0;
 }
+
+@media (max-width:768px) {
+    footer {
+        padding: 10px 10vw 60px;
+    }
+}
