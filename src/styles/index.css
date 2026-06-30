@@ -225,8 +225,8 @@
 .about-cta-button:hover {
     color: var(--secondary-color);
     border-color: var(--secondary-color);
-    background-color: #f2f6f9;
-    box-shadow: 0 30px 50px rgb(250, 250, 250);
+    background-color: var(--about-me);
+    box-shadow: 0 10px 50px rgb(250, 250, 250);
 }
 
 #current-focus {
