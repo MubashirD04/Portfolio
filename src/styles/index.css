@@ -250,6 +250,10 @@
     font-size: 56px;
 }
 
+#current-focus .section-title {
+    font-size: 56px;
+}
+
 .current-focus-subtitle {
     font-size: var(--font-size);
     text-align: center;
@@ -294,6 +298,11 @@
 .project-link {
     text-decoration: none;
     color: var(--primary-color);
+}
+
+.project-link.disabled {
+    color: var(--muted-color, #888);
+    cursor: default;
 }
 
 #contact {

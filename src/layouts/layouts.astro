@@ -18,6 +18,17 @@ const path = rawPath.length > 1 ? rawPath.replace(/\/$/, "") : rawPath;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.url.href} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={new URL("/assets/favicon.png", Astro.url).href} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/assets/favicon.png", Astro.url).href} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,6 +57,7 @@ const path = rawPath.length > 1 ? rawPath.replace(/\/$/, "") : rawPath;
   </head>
 
   <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <div id="page-wrapper">
       <nav>
         <div class="logo-area">
@@ -64,7 +76,12 @@ const path = rawPath.length > 1 ? rawPath.replace(/\/$/, "") : rawPath;
             />
           </div>
           <span class="logo-divider"></span>
-          <button class="hamburger" id="hamburger" aria-label="Menu">
+          <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Menu"
+            aria-expanded="false"
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -171,22 +188,34 @@ const path = rawPath.length > 1 ? rawPath.replace(/\/$/, "") : rawPath;
 
           <ul>
             <li>
-              <a href="/" class={path === "/" ? "current-page" : ""}>Home</a>
+              <a
+                href="/"
+                class={path === "/" ? "current-page" : ""}
+                aria-current={path === "/" ? "page" : undefined}>Home</a
+              >
             </li>
             <li>
-              <a href="/about" class={path === "/about" ? "current-page" : ""}
+              <a
+                href="/about"
+                class={path === "/about" ? "current-page" : ""}
+                aria-current={path === "/about" ? "page" : undefined}
                 >About</a
               >
             </li>
             <li>
-              <a href="/skills" class={path === "/skills" ? "current-page" : ""}
+              <a
+                href="/skills"
+                class={path === "/skills" ? "current-page" : ""}
+                aria-current={path === "/skills" ? "page" : undefined}
                 >Skills</a
               >
             </li>
             <li>
               <a
                 href="/projects"
-                class={path === "/projects" ? "current-page" : ""}>Projects</a
+                class={path === "/projects" ? "current-page" : ""}
+                aria-current={path === "/projects" ? "page" : undefined}
+                >Projects</a
               >
             </li>
             <li class="nav-theme-item">
@@ -216,7 +245,7 @@ const path = rawPath.length > 1 ? rawPath.replace(/\/$/, "") : rawPath;
         </div>
       </nav>
 
-      <main>
+      <main id="main-content">
         <slot />
       </main>
 
@@ -229,7 +258,11 @@ const path = rawPath.length > 1 ? rawPath.replace(/\/$/, "") : rawPath;
 
       <!-- Chatbot Widget -->
       <div id="chatbot-container">
-        <button id="chat-toggle" title="Chat with me!">
+        <button
+          id="chat-toggle"
+          title="Chat with me!"
+          aria-label="Open chat assistant"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -249,7 +282,7 @@ const path = rawPath.length > 1 ? rawPath.replace(/\/$/, "") : rawPath;
         <div id="chat-box" style="display: none;">
           <div id="chat-header">
             <h3>Chat Assistant</h3>
-            <button id="chat-close">&times;</button>
+            <button id="chat-close" aria-label="Close chat">&times;</button>
           </div>
           <div id="chat-messages">
             <!-- Messages will appear here -->

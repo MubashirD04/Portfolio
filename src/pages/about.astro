@@ -1,10 +1,11 @@
 ---
 import Layouts from "../layouts/layouts.astro";
+import Contact from "../components/Contact.astro";
 ---
 
 <Layouts
-  title="Mubashir Dawood | Full Stack Developer & Software Engineer"
-  description="About Mubashir, motivations and hobbies"
+  title="About | Mubashir Dawood"
+  description="Computer Science graduate and full-stack developer based in Cape Town, South Africa, specializing in Go, Python, and data-driven backend systems."
 >
   <h2 class="section-title">About Me</h2>
 
@@ -99,46 +100,5 @@ import Layouts from "../layouts/layouts.astro";
     </div>
   </section>
 
-  <section id="contact">
-    <h2 class="section-title">Get In Touch</h2>
-    <div
-      class="card"
-      style="max-width: 600px; margin: 0 auto; text-align: center;"
-    >
-      <p style="margin-bottom: 20px;">
-        Interested in working together? Let's build something extraordinary.
-      </p>
-      <p>
-        <strong>LinkedIn:</strong>
-        <a
-          href="https://www.linkedin.com/in/mubashir-dawood-2b2a79206/"
-          style="color: var(--primary-color);"
-          target="_blank"
-          rel="noopener noreferrer">linkedin.com/in/mubashir-dawood-a1b2c3d4/</a
-        >
-      </p>
-      <p><strong>Email:</strong> mubashir.dawood4@gmail.com</p>
-      <p>
-        <strong>GitHub:</strong>
-        <a
-          href="https://github.com/MubashirD04"
-          style="color: var(--primary-color);"
-          target="_blank"
-          rel="noopener noreferrer">github.com/MubashirD04</a
-        >
-      </p>
-      <p>
-        <strong>WhatsApp:</strong>
-        <a
-          href="https://wa.me/27827605538"
-          style="color: var(--primary-color);"
-          target="_blank"
-          rel="noopener noreferrer">+27 82 760 5538</a
-        >
-      </p>
-      <a href="mailto:mubashir.dawood4@gmail.com" class="btn btn-primary"
-        >Send a Message</a
-      >
-    </div>
-  </section>
+  <Contact />
 </Layouts>

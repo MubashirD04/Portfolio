@@ -8,6 +8,7 @@ export function setupMobileMenu() {
     const toggleMenu = () => {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
     };
 
     hamburger.addEventListener('click', toggleMenu);
@@ -16,6 +17,7 @@ export function setupMobileMenu() {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navLinks.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
         });
     });
 }

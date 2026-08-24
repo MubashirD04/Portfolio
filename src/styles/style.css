@@ -61,9 +61,25 @@
 }
 
 .current-page {
-    pointer-events: none; 
-    cursor: default;       
-    opacity: 0.6;          
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.6;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    z-index: 1000;
+    padding: 10px 16px;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
 }
 
 html, body {
@@ -399,6 +415,20 @@ section {
     overflow: hidden;
     position: relative;
     cursor: default;
+}
+
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-intro {
+    margin-bottom: 20px;
+}
+
+.contact-link {
+    color: var(--primary-color);
 }
 
 

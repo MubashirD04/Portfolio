@@ -81,7 +81,7 @@ export class Chatbot {
             id: `msg-${id}`,
             className: `message ${sender}-message ${isTyping ? 'message-typing' : ''}`
         });
-        div.innerHTML = `<strong>${sender === 'user' ? 'You' : 'Assistant'}:</strong> ${text.replace(/\n/g, '<br>')}`;
+        this.renderMessageBody(div, sender === 'user' ? 'You' : 'Assistant', text);
         this.elements.messages.appendChild(div);
         this.scrollToBottom();
         return id;
@@ -90,10 +90,20 @@ export class Chatbot {
     updateMessage(id, text) {
         const div = document.getElementById(`msg-${id}`);
         if (div) {
-            div.innerHTML = `<strong>Assistant:</strong> ${text.replace(/\n/g, '<br>')}`;
+            this.renderMessageBody(div, 'Assistant', text);
             div.classList.remove('message-typing');
             this.scrollToBottom();
         }
+    }
+
+    renderMessageBody(div, label, text) {
+        div.replaceChildren();
+        const strong = Object.assign(document.createElement("strong"), { textContent: `${label}:` });
+        div.append(strong, " ");
+        text.split("\n").forEach((line, i) => {
+            if (i > 0) div.append(document.createElement("br"));
+            div.append(document.createTextNode(line));
+        });
     }
 
     scrollToBottom() {
